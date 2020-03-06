@@ -20,15 +20,15 @@ public class RubriqueQuestion implements Serializable {
 
 	private BigDecimal ordre;
 
-	//bi-directional many-to-one association to Question
+	//uni-directional many-to-one association to Question
 	@ManyToOne
-	@JoinColumn(name="ID_QUESTION")
-	private Question question;
+	@JoinColumn(name="ID_QUESTION", insertable=false, updatable=false)
+	private Question questionn;
 
-	//bi-directional many-to-one association to Rubrique
+	//uni-directional many-to-one association to Rubrique
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE")
-	private Rubrique rubrique;
+	@JoinColumn(name="ID_RUBRIQUE", insertable=false, updatable=false)
+	private Rubrique rubriquee;
 
 	public RubriqueQuestion() {
 	}
@@ -49,20 +49,20 @@ public class RubriqueQuestion implements Serializable {
 		this.ordre = ordre;
 	}
 
-	public Question getQuestion() {
-		return this.question;
+	public Question getQuestionn() {
+		return this.questionn;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void setQuestionn(Question questionn) {
+		this.questionn = questionn;
 	}
 
-	public Rubrique getRubrique() {
-		return this.rubrique;
+	public Rubrique getRubriquee() {
+		return this.rubriquee;
 	}
 
-	public void setRubrique(Rubrique rubrique) {
-		this.rubrique = rubrique;
+	public void setRubriquee(Rubrique rubriquee) {
+		this.rubriquee = rubriquee;
 	}
 
 }

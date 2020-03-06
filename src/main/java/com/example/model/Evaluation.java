@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -38,43 +37,35 @@ public class Evaluation implements Serializable {
 
 	private String periode;
 
-	//bi-directional many-to-one association to ElementConstitutif
+	//uni-directional many-to-one association to ElementConstitutif
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="CODE_EC", referencedColumnName="CODE_EC"),
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION"),
-		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE")
+		@JoinColumn(name="CODE_EC", referencedColumnName="CODE_EC", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
-	private ElementConstitutif elementConstitutif;
+	private ElementConstitutif elementConstitutiff;
 
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
-	//bi-directional many-to-one association to Promotion
+	//uni-directional many-to-one association to Promotion
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE"),
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION")
+		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false)
 		})
-	private Promotion promotion;
+	private Promotion promotionn;
 
 	//bi-directional many-to-one association to UniteEnseignement
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION"),
-		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE")
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
-	private UniteEnseignement uniteEnseignement;
-
-	//bi-directional many-to-one association to ReponseEvaluation
-	@OneToMany(mappedBy="evaluation")
-	private List<ReponseEvaluation> reponseEvaluations;
-
-	//bi-directional many-to-one association to RubriqueEvaluation
-	@OneToMany(mappedBy="evaluation")
-	private List<RubriqueEvaluation> rubriqueEvaluations;
+	private UniteEnseignement uniteEnseignementt;
 
 	public Evaluation() {
 	}
@@ -135,80 +126,36 @@ public class Evaluation implements Serializable {
 		this.periode = periode;
 	}
 
-	public ElementConstitutif getElementConstitutif() {
-		return this.elementConstitutif;
+	public ElementConstitutif getElementConstitutiff() {
+		return this.elementConstitutiff;
 	}
 
-	public void setElementConstitutif(ElementConstitutif elementConstitutif) {
-		this.elementConstitutif = elementConstitutif;
+	public void setElementConstitutiff(ElementConstitutif elementConstitutiff) {
+		this.elementConstitutiff = elementConstitutiff;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
-	public Promotion getPromotion() {
-		return this.promotion;
+	public Promotion getPromotionn() {
+		return this.promotionn;
 	}
 
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
+	public void setPromotionn(Promotion promotionn) {
+		this.promotionn = promotionn;
 	}
 
-	public UniteEnseignement getUniteEnseignement() {
-		return this.uniteEnseignement;
+	public UniteEnseignement getUniteEnseignementt() {
+		return this.uniteEnseignementt;
 	}
 
-	public void setUniteEnseignement(UniteEnseignement uniteEnseignement) {
-		this.uniteEnseignement = uniteEnseignement;
-	}
-
-	public List<ReponseEvaluation> getReponseEvaluations() {
-		return this.reponseEvaluations;
-	}
-
-	public void setReponseEvaluations(List<ReponseEvaluation> reponseEvaluations) {
-		this.reponseEvaluations = reponseEvaluations;
-	}
-
-	public ReponseEvaluation addReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().add(reponseEvaluation);
-		reponseEvaluation.setEvaluation(this);
-
-		return reponseEvaluation;
-	}
-
-	public ReponseEvaluation removeReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().remove(reponseEvaluation);
-		reponseEvaluation.setEvaluation(null);
-
-		return reponseEvaluation;
-	}
-
-	public List<RubriqueEvaluation> getRubriqueEvaluations() {
-		return this.rubriqueEvaluations;
-	}
-
-	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
-		this.rubriqueEvaluations = rubriqueEvaluations;
-	}
-
-	public RubriqueEvaluation addRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().add(rubriqueEvaluation);
-		rubriqueEvaluation.setEvaluation(this);
-
-		return rubriqueEvaluation;
-	}
-
-	public RubriqueEvaluation removeRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().remove(rubriqueEvaluation);
-		rubriqueEvaluation.setEvaluation(null);
-
-		return rubriqueEvaluation;
+	public void setUniteEnseignementt(UniteEnseignement uniteEnseignementt) {
+		this.uniteEnseignementt = uniteEnseignementt;
 	}
 
 }

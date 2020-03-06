@@ -3,7 +3,6 @@ package com.example.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -32,22 +31,18 @@ public class ElementConstitutif implements Serializable {
 	@Column(name="NBH_TP")
 	private BigDecimal nbhTp;
 
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
-	//bi-directional many-to-one association to UniteEnseignement
+	//uni-directional many-to-one association to UniteEnseignement
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION"),
-		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE")
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
-	private UniteEnseignement uniteEnseignement;
-
-	//bi-directional many-to-one association to Evaluation
-	@OneToMany(mappedBy="elementConstitutif")
-	private List<Evaluation> evaluations;
+	private UniteEnseignement uniteEnseignementt;
 
 	public ElementConstitutif() {
 	}
@@ -100,42 +95,20 @@ public class ElementConstitutif implements Serializable {
 		this.nbhTp = nbhTp;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
-	public UniteEnseignement getUniteEnseignement() {
-		return this.uniteEnseignement;
+	public UniteEnseignement getUniteEnseignementt() {
+		return this.uniteEnseignementt;
 	}
 
-	public void setUniteEnseignement(UniteEnseignement uniteEnseignement) {
-		this.uniteEnseignement = uniteEnseignement;
-	}
-
-	public List<Evaluation> getEvaluations() {
-		return this.evaluations;
-	}
-
-	public void setEvaluations(List<Evaluation> evaluations) {
-		this.evaluations = evaluations;
-	}
-
-	public Evaluation addEvaluation(Evaluation evaluation) {
-		getEvaluations().add(evaluation);
-		evaluation.setElementConstitutif(this);
-
-		return evaluation;
-	}
-
-	public Evaluation removeEvaluation(Evaluation evaluation) {
-		getEvaluations().remove(evaluation);
-		evaluation.setElementConstitutif(null);
-
-		return evaluation;
+	public void setUniteEnseignementt(UniteEnseignement uniteEnseignementt) {
+		this.uniteEnseignementt = uniteEnseignementt;
 	}
 
 }

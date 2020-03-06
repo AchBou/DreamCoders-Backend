@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -64,17 +63,13 @@ public class Etudiant implements Serializable {
 
 	private String ville;
 
-	//bi-directional many-to-one association to Promotion
+	//uni-directional many-to-one association to Promotion
 	@ManyToOne
 	@JoinColumns({
-		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE"),
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION")
+		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE", insertable=false, updatable=false),
+		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false)
 		})
-	private Promotion promotion;
-
-	//bi-directional many-to-one association to ReponseEvaluation
-	@OneToMany(mappedBy="etudiant")
-	private List<ReponseEvaluation> reponseEvaluations;
+	private Promotion promotionn;
 
 	public Etudiant() {
 	}
@@ -223,34 +218,12 @@ public class Etudiant implements Serializable {
 		this.ville = ville;
 	}
 
-	public Promotion getPromotion() {
-		return this.promotion;
+	public Promotion getPromotionn() {
+		return this.promotionn;
 	}
 
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
-	}
-
-	public List<ReponseEvaluation> getReponseEvaluations() {
-		return this.reponseEvaluations;
-	}
-
-	public void setReponseEvaluations(List<ReponseEvaluation> reponseEvaluations) {
-		this.reponseEvaluations = reponseEvaluations;
-	}
-
-	public ReponseEvaluation addReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().add(reponseEvaluation);
-		reponseEvaluation.setEtudiant(this);
-
-		return reponseEvaluation;
-	}
-
-	public ReponseEvaluation removeReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().remove(reponseEvaluation);
-		reponseEvaluation.setEtudiant(null);
-
-		return reponseEvaluation;
+	public void setPromotionn(Promotion promotionn) {
+		this.promotionn = promotionn;
 	}
 
 }

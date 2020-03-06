@@ -2,7 +2,6 @@ package com.example.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -16,7 +15,7 @@ public class Question implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_QUESTION")
+	@Column(name="ID_QUESTION", insertable=false, updatable=false)
 	private long idQuestion;
 
 	private String intitule;
@@ -24,23 +23,15 @@ public class Question implements Serializable {
 	@Column(name="\"TYPE\"")
 	private String type;
 
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
-	//bi-directional many-to-one association to Qualificatif
+	//uni-directional many-to-one association to Qualificatif
 	@ManyToOne
-	@JoinColumn(name="ID_QUALIFICATIF")
-	private Qualificatif qualificatif;
-
-	//bi-directional many-to-one association to QuestionEvaluation
-	@OneToMany(mappedBy="question")
-	private List<QuestionEvaluation> questionEvaluations;
-
-	//bi-directional many-to-one association to RubriqueQuestion
-	@OneToMany(mappedBy="question")
-	private List<RubriqueQuestion> rubriqueQuestions;
+	@JoinColumn(name="ID_QUALIFICATIF", insertable=false, updatable=false)
+	private Qualificatif qualificatiff;
 
 	public Question() {
 	}
@@ -69,64 +60,20 @@ public class Question implements Serializable {
 		this.type = type;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
-	public Qualificatif getQualificatif() {
-		return this.qualificatif;
+	public Qualificatif getQualificatiff() {
+		return this.qualificatiff;
 	}
 
-	public void setQualificatif(Qualificatif qualificatif) {
-		this.qualificatif = qualificatif;
-	}
-
-	public List<QuestionEvaluation> getQuestionEvaluations() {
-		return this.questionEvaluations;
-	}
-
-	public void setQuestionEvaluations(List<QuestionEvaluation> questionEvaluations) {
-		this.questionEvaluations = questionEvaluations;
-	}
-
-	public QuestionEvaluation addQuestionEvaluation(QuestionEvaluation questionEvaluation) {
-		getQuestionEvaluations().add(questionEvaluation);
-		questionEvaluation.setQuestion(this);
-
-		return questionEvaluation;
-	}
-
-	public QuestionEvaluation removeQuestionEvaluation(QuestionEvaluation questionEvaluation) {
-		getQuestionEvaluations().remove(questionEvaluation);
-		questionEvaluation.setQuestion(null);
-
-		return questionEvaluation;
-	}
-
-	public List<RubriqueQuestion> getRubriqueQuestions() {
-		return this.rubriqueQuestions;
-	}
-
-	public void setRubriqueQuestions(List<RubriqueQuestion> rubriqueQuestions) {
-		this.rubriqueQuestions = rubriqueQuestions;
-	}
-
-	public RubriqueQuestion addRubriqueQuestion(RubriqueQuestion rubriqueQuestion) {
-		getRubriqueQuestions().add(rubriqueQuestion);
-		rubriqueQuestion.setQuestion(this);
-
-		return rubriqueQuestion;
-	}
-
-	public RubriqueQuestion removeRubriqueQuestion(RubriqueQuestion rubriqueQuestion) {
-		getRubriqueQuestions().remove(rubriqueQuestion);
-		rubriqueQuestion.setQuestion(null);
-
-		return rubriqueQuestion;
+	public void setQualificatiff(Qualificatif qualificatiff) {
+		this.qualificatiff = qualificatiff;
 	}
 
 }

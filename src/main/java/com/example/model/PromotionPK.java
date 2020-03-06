@@ -15,7 +15,7 @@ public class PromotionPK implements Serializable {
 	@Column(name="ANNEE_UNIVERSITAIRE")
 	private String anneeUniversitaire;
 
-	@Column(name="CODE_FORMATION", insertable=false, updatable=false)
+	@Column(name="CODE_FORMATION")
 	private String codeFormation;
 
 	public PromotionPK() {

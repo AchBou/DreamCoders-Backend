@@ -20,15 +20,15 @@ public class ReponseQuestion implements Serializable {
 
 	private BigDecimal positionnement;
 
-	//bi-directional many-to-one association to QuestionEvaluation
+	//uni-directional many-to-one association to QuestionEvaluation
 	@ManyToOne
-	@JoinColumn(name="ID_QUESTION_EVALUATION")
-	private QuestionEvaluation questionEvaluation;
+	@JoinColumn(name="ID_QUESTION_EVALUATION", insertable=false, updatable=false)
+	private QuestionEvaluation questionEvaluationn;
 
-	//bi-directional many-to-one association to ReponseEvaluation
+	//uni-directional many-to-one association to ReponseEvaluation
 	@ManyToOne
-	@JoinColumn(name="ID_REPONSE_EVALUATION")
-	private ReponseEvaluation reponseEvaluation;
+	@JoinColumn(name="ID_REPONSE_EVALUATION", insertable=false, updatable=false)
+	private ReponseEvaluation reponseEvaluationn;
 
 	public ReponseQuestion() {
 	}
@@ -49,20 +49,20 @@ public class ReponseQuestion implements Serializable {
 		this.positionnement = positionnement;
 	}
 
-	public QuestionEvaluation getQuestionEvaluation() {
-		return this.questionEvaluation;
+	public QuestionEvaluation getQuestionEvaluationn() {
+		return this.questionEvaluationn;
 	}
 
-	public void setQuestionEvaluation(QuestionEvaluation questionEvaluation) {
-		this.questionEvaluation = questionEvaluation;
+	public void setQuestionEvaluationn(QuestionEvaluation questionEvaluationn) {
+		this.questionEvaluationn = questionEvaluationn;
 	}
 
-	public ReponseEvaluation getReponseEvaluation() {
-		return this.reponseEvaluation;
+	public ReponseEvaluation getReponseEvaluationn() {
+		return this.reponseEvaluationn;
 	}
 
-	public void setReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		this.reponseEvaluation = reponseEvaluation;
+	public void setReponseEvaluationn(ReponseEvaluation reponseEvaluationn) {
+		this.reponseEvaluationn = reponseEvaluationn;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -45,23 +44,15 @@ public class Promotion implements Serializable {
 	@Column(name="SIGLE_PROMOTION")
 	private String siglePromotion;
 
-	//bi-directional many-to-one association to Etudiant
-	@OneToMany(mappedBy="promotion")
-	private List<Etudiant> etudiants;
-
-	//bi-directional many-to-one association to Evaluation
-	@OneToMany(mappedBy="promotion")
-	private List<Evaluation> evaluations;
-
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
-	//bi-directional many-to-one association to Formation
+	//uni-directional many-to-one association to Formation
 	@ManyToOne
-	@JoinColumn(name="CODE_FORMATION")
-	private Formation formation;
+	@JoinColumn(name="CODE_FORMATION", insertable=false, updatable=false)
+	private Formation formationn;
 
 	public Promotion() {
 	}
@@ -138,64 +129,20 @@ public class Promotion implements Serializable {
 		this.siglePromotion = siglePromotion;
 	}
 
-	public List<Etudiant> getEtudiants() {
-		return this.etudiants;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEtudiants(List<Etudiant> etudiants) {
-		this.etudiants = etudiants;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
-	public Etudiant addEtudiant(Etudiant etudiant) {
-		getEtudiants().add(etudiant);
-		etudiant.setPromotion(this);
-
-		return etudiant;
+	public Formation getFormationn() {
+		return this.formationn;
 	}
 
-	public Etudiant removeEtudiant(Etudiant etudiant) {
-		getEtudiants().remove(etudiant);
-		etudiant.setPromotion(null);
-
-		return etudiant;
-	}
-
-	public List<Evaluation> getEvaluations() {
-		return this.evaluations;
-	}
-
-	public void setEvaluations(List<Evaluation> evaluations) {
-		this.evaluations = evaluations;
-	}
-
-	public Evaluation addEvaluation(Evaluation evaluation) {
-		getEvaluations().add(evaluation);
-		evaluation.setPromotion(this);
-
-		return evaluation;
-	}
-
-	public Evaluation removeEvaluation(Evaluation evaluation) {
-		getEvaluations().remove(evaluation);
-		evaluation.setPromotion(null);
-
-		return evaluation;
-	}
-
-	public Enseignant getEnseignant() {
-		return this.enseignant;
-	}
-
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
-	}
-
-	public Formation getFormation() {
-		return this.formation;
-	}
-
-	public void setFormation(Formation formation) {
-		this.formation = formation;
+	public void setFormationn(Formation formationn) {
+		this.formationn = formationn;
 	}
 
 }

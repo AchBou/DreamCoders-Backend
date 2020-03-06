@@ -3,7 +3,6 @@ package com.example.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -27,18 +26,10 @@ public class Rubrique implements Serializable {
 	@Column(name="\"TYPE\"")
 	private String type;
 
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
-
-	//bi-directional many-to-one association to RubriqueEvaluation
-	@OneToMany(mappedBy="rubrique")
-	private List<RubriqueEvaluation> rubriqueEvaluations;
-
-	//bi-directional many-to-one association to RubriqueQuestion
-	@OneToMany(mappedBy="rubrique")
-	private List<RubriqueQuestion> rubriqueQuestions;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
 	public Rubrique() {
 	}
@@ -75,56 +66,12 @@ public class Rubrique implements Serializable {
 		this.type = type;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
-	}
-
-	public List<RubriqueEvaluation> getRubriqueEvaluations() {
-		return this.rubriqueEvaluations;
-	}
-
-	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
-		this.rubriqueEvaluations = rubriqueEvaluations;
-	}
-
-	public RubriqueEvaluation addRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().add(rubriqueEvaluation);
-		rubriqueEvaluation.setRubrique(this);
-
-		return rubriqueEvaluation;
-	}
-
-	public RubriqueEvaluation removeRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().remove(rubriqueEvaluation);
-		rubriqueEvaluation.setRubrique(null);
-
-		return rubriqueEvaluation;
-	}
-
-	public List<RubriqueQuestion> getRubriqueQuestions() {
-		return this.rubriqueQuestions;
-	}
-
-	public void setRubriqueQuestions(List<RubriqueQuestion> rubriqueQuestions) {
-		this.rubriqueQuestions = rubriqueQuestions;
-	}
-
-	public RubriqueQuestion addRubriqueQuestion(RubriqueQuestion rubriqueQuestion) {
-		getRubriqueQuestions().add(rubriqueQuestion);
-		rubriqueQuestion.setRubrique(this);
-
-		return rubriqueQuestion;
-	}
-
-	public RubriqueQuestion removeRubriqueQuestion(RubriqueQuestion rubriqueQuestion) {
-		getRubriqueQuestions().remove(rubriqueQuestion);
-		rubriqueQuestion.setRubrique(null);
-
-		return rubriqueQuestion;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
 }

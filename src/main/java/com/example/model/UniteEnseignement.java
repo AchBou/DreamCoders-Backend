@@ -34,23 +34,19 @@ public class UniteEnseignement implements Serializable {
 
 	private String semestre;
 
-	//bi-directional many-to-one association to ElementConstitutif
-	@OneToMany(mappedBy="uniteEnseignement")
-	private List<ElementConstitutif> elementConstitutifs;
-
 	//bi-directional many-to-one association to Evaluation
-	@OneToMany(mappedBy="uniteEnseignement")
+	@OneToMany(mappedBy="uniteEnseignementt")
 	private List<Evaluation> evaluations;
 
-	//bi-directional many-to-one association to Enseignant
+	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
+	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	private Enseignant enseignantt;
 
-	//bi-directional many-to-one association to Formation
+	//uni-directional many-to-one association to Formation
 	@ManyToOne
-	@JoinColumn(name="CODE_FORMATION")
-	private Formation formation;
+	@JoinColumn(name="CODE_FORMATION", insertable=false, updatable=false)
+	private Formation formationn;
 
 	public UniteEnseignement() {
 	}
@@ -111,28 +107,6 @@ public class UniteEnseignement implements Serializable {
 		this.semestre = semestre;
 	}
 
-	public List<ElementConstitutif> getElementConstitutifs() {
-		return this.elementConstitutifs;
-	}
-
-	public void setElementConstitutifs(List<ElementConstitutif> elementConstitutifs) {
-		this.elementConstitutifs = elementConstitutifs;
-	}
-
-	public ElementConstitutif addElementConstitutif(ElementConstitutif elementConstitutif) {
-		getElementConstitutifs().add(elementConstitutif);
-		elementConstitutif.setUniteEnseignement(this);
-
-		return elementConstitutif;
-	}
-
-	public ElementConstitutif removeElementConstitutif(ElementConstitutif elementConstitutif) {
-		getElementConstitutifs().remove(elementConstitutif);
-		elementConstitutif.setUniteEnseignement(null);
-
-		return elementConstitutif;
-	}
-
 	public List<Evaluation> getEvaluations() {
 		return this.evaluations;
 	}
@@ -143,32 +117,32 @@ public class UniteEnseignement implements Serializable {
 
 	public Evaluation addEvaluation(Evaluation evaluation) {
 		getEvaluations().add(evaluation);
-		evaluation.setUniteEnseignement(this);
+		evaluation.setUniteEnseignementt(this);
 
 		return evaluation;
 	}
 
 	public Evaluation removeEvaluation(Evaluation evaluation) {
 		getEvaluations().remove(evaluation);
-		evaluation.setUniteEnseignement(null);
+		evaluation.setUniteEnseignementt(null);
 
 		return evaluation;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Enseignant getEnseignantt() {
+		return this.enseignantt;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignantt(Enseignant enseignantt) {
+		this.enseignantt = enseignantt;
 	}
 
-	public Formation getFormation() {
-		return this.formation;
+	public Formation getFormationn() {
+		return this.formationn;
 	}
 
-	public void setFormation(Formation formation) {
-		this.formation = formation;
+	public void setFormationn(Formation formationn) {
+		this.formationn = formationn;
 	}
 
 }

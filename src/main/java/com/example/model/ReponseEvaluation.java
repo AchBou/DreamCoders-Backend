@@ -2,7 +2,6 @@ package com.example.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -26,19 +25,15 @@ public class ReponseEvaluation implements Serializable {
 
 	private String prenom;
 
-	//bi-directional many-to-one association to Etudiant
+	//uni-directional many-to-one association to Etudiant
 	@ManyToOne
-	@JoinColumn(name="NO_ETUDIANT")
-	private Etudiant etudiant;
+	@JoinColumn(name="NO_ETUDIANT", insertable=false, updatable=false)
+	private Etudiant etudiantt;
 
-	//bi-directional many-to-one association to Evaluation
+	//uni-directional many-to-one association to Evaluation
 	@ManyToOne
-	@JoinColumn(name="ID_EVALUATION")
-	private Evaluation evaluation;
-
-	//bi-directional many-to-one association to ReponseQuestion
-	@OneToMany(mappedBy="reponseEvaluation")
-	private List<ReponseQuestion> reponseQuestions;
+	@JoinColumn(name="ID_EVALUATION", insertable=false, updatable=false)
+	private Evaluation evaluationn;
 
 	public ReponseEvaluation() {
 	}
@@ -75,42 +70,20 @@ public class ReponseEvaluation implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public Etudiant getEtudiant() {
-		return this.etudiant;
+	public Etudiant getEtudiantt() {
+		return this.etudiantt;
 	}
 
-	public void setEtudiant(Etudiant etudiant) {
-		this.etudiant = etudiant;
+	public void setEtudiantt(Etudiant etudiantt) {
+		this.etudiantt = etudiantt;
 	}
 
-	public Evaluation getEvaluation() {
-		return this.evaluation;
+	public Evaluation getEvaluationn() {
+		return this.evaluationn;
 	}
 
-	public void setEvaluation(Evaluation evaluation) {
-		this.evaluation = evaluation;
-	}
-
-	public List<ReponseQuestion> getReponseQuestions() {
-		return this.reponseQuestions;
-	}
-
-	public void setReponseQuestions(List<ReponseQuestion> reponseQuestions) {
-		this.reponseQuestions = reponseQuestions;
-	}
-
-	public ReponseQuestion addReponseQuestion(ReponseQuestion reponseQuestion) {
-		getReponseQuestions().add(reponseQuestion);
-		reponseQuestion.setReponseEvaluation(this);
-
-		return reponseQuestion;
-	}
-
-	public ReponseQuestion removeReponseQuestion(ReponseQuestion reponseQuestion) {
-		getReponseQuestions().remove(reponseQuestion);
-		reponseQuestion.setReponseEvaluation(null);
-
-		return reponseQuestion;
+	public void setEvaluationn(Evaluation evaluationn) {
+		this.evaluationn = evaluationn;
 	}
 
 }

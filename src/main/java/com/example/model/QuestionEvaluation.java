@@ -3,7 +3,6 @@ package com.example.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -18,31 +17,27 @@ public class QuestionEvaluation implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_QUESTION_EVALUATION")
+	@Column(name="ID_QUESTION_EVALUATION", insertable=false, updatable=false)
 	private long idQuestionEvaluation;
 
 	private String intitule;
 
 	private BigDecimal ordre;
 
-	//bi-directional many-to-one association to Qualificatif
+	//uni-directional many-to-one association to Qualificatif
 	@ManyToOne
-	@JoinColumn(name="ID_QUALIFICATIF")
-	private Qualificatif qualificatif;
+	@JoinColumn(name="ID_QUALIFICATIF", insertable=false, updatable=false)
+	private Qualificatif qualificatiff;
 
-	//bi-directional many-to-one association to Question
+	//uni-directional many-to-one association to Question
 	@ManyToOne
-	@JoinColumn(name="ID_QUESTION")
-	private Question question;
+	@JoinColumn(name="ID_QUESTION", insertable=false, updatable=false)
+	private Question questionn;
 
-	//bi-directional many-to-one association to RubriqueEvaluation
+	//uni-directional many-to-one association to RubriqueEvaluation
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE_EVALUATION")
-	private RubriqueEvaluation rubriqueEvaluation;
-
-	//bi-directional many-to-one association to ReponseQuestion
-	@OneToMany(mappedBy="questionEvaluation")
-	private List<ReponseQuestion> reponseQuestions;
+	@JoinColumn(name="ID_RUBRIQUE_EVALUATION", insertable=false, updatable=false)
+	private RubriqueEvaluation rubriqueEvaluationn;
 
 	public QuestionEvaluation() {
 	}
@@ -71,50 +66,28 @@ public class QuestionEvaluation implements Serializable {
 		this.ordre = ordre;
 	}
 
-	public Qualificatif getQualificatif() {
-		return this.qualificatif;
+	public Qualificatif getQualificatiff() {
+		return this.qualificatiff;
 	}
 
-	public void setQualificatif(Qualificatif qualificatif) {
-		this.qualificatif = qualificatif;
+	public void setQualificatiff(Qualificatif qualificatiff) {
+		this.qualificatiff = qualificatiff;
 	}
 
-	public Question getQuestion() {
-		return this.question;
+	public Question getQuestionn() {
+		return this.questionn;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
+	public void setQuestionn(Question questionn) {
+		this.questionn = questionn;
 	}
 
-	public RubriqueEvaluation getRubriqueEvaluation() {
-		return this.rubriqueEvaluation;
+	public RubriqueEvaluation getRubriqueEvaluationn() {
+		return this.rubriqueEvaluationn;
 	}
 
-	public void setRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		this.rubriqueEvaluation = rubriqueEvaluation;
-	}
-
-	public List<ReponseQuestion> getReponseQuestions() {
-		return this.reponseQuestions;
-	}
-
-	public void setReponseQuestions(List<ReponseQuestion> reponseQuestions) {
-		this.reponseQuestions = reponseQuestions;
-	}
-
-	public ReponseQuestion addReponseQuestion(ReponseQuestion reponseQuestion) {
-		getReponseQuestions().add(reponseQuestion);
-		reponseQuestion.setQuestionEvaluation(this);
-
-		return reponseQuestion;
-	}
-
-	public ReponseQuestion removeReponseQuestion(ReponseQuestion reponseQuestion) {
-		getReponseQuestions().remove(reponseQuestion);
-		reponseQuestion.setQuestionEvaluation(null);
-
-		return reponseQuestion;
+	public void setRubriqueEvaluationn(RubriqueEvaluation rubriqueEvaluationn) {
+		this.rubriqueEvaluationn = rubriqueEvaluationn;
 	}
 
 }

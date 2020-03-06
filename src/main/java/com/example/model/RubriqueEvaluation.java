@@ -3,7 +3,6 @@ package com.example.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 /**
@@ -25,19 +24,15 @@ public class RubriqueEvaluation implements Serializable {
 
 	private BigDecimal ordre;
 
-	//bi-directional many-to-one association to QuestionEvaluation
-	@OneToMany(mappedBy="rubriqueEvaluation")
-	private List<QuestionEvaluation> questionEvaluations;
-
-	//bi-directional many-to-one association to Evaluation
+	//uni-directional many-to-one association to Evaluation
 	@ManyToOne
-	@JoinColumn(name="ID_EVALUATION")
-	private Evaluation evaluation;
+	@JoinColumn(name="ID_EVALUATION", insertable=false, updatable=false)
+	private Evaluation evaluationn;
 
-	//bi-directional many-to-one association to Rubrique
+	//uni-directional many-to-one association to Rubrique
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE")
-	private Rubrique rubrique;
+	@JoinColumn(name="ID_RUBRIQUE", insertable=false, updatable=false)
+	private Rubrique rubriquee;
 
 	public RubriqueEvaluation() {
 	}
@@ -66,42 +61,20 @@ public class RubriqueEvaluation implements Serializable {
 		this.ordre = ordre;
 	}
 
-	public List<QuestionEvaluation> getQuestionEvaluations() {
-		return this.questionEvaluations;
+	public Evaluation getEvaluationn() {
+		return this.evaluationn;
 	}
 
-	public void setQuestionEvaluations(List<QuestionEvaluation> questionEvaluations) {
-		this.questionEvaluations = questionEvaluations;
+	public void setEvaluationn(Evaluation evaluationn) {
+		this.evaluationn = evaluationn;
 	}
 
-	public QuestionEvaluation addQuestionEvaluation(QuestionEvaluation questionEvaluation) {
-		getQuestionEvaluations().add(questionEvaluation);
-		questionEvaluation.setRubriqueEvaluation(this);
-
-		return questionEvaluation;
+	public Rubrique getRubriquee() {
+		return this.rubriquee;
 	}
 
-	public QuestionEvaluation removeQuestionEvaluation(QuestionEvaluation questionEvaluation) {
-		getQuestionEvaluations().remove(questionEvaluation);
-		questionEvaluation.setRubriqueEvaluation(null);
-
-		return questionEvaluation;
-	}
-
-	public Evaluation getEvaluation() {
-		return this.evaluation;
-	}
-
-	public void setEvaluation(Evaluation evaluation) {
-		this.evaluation = evaluation;
-	}
-
-	public Rubrique getRubrique() {
-		return this.rubrique;
-	}
-
-	public void setRubrique(Rubrique rubrique) {
-		this.rubrique = rubrique;
+	public void setRubriquee(Rubrique rubriquee) {
+		this.rubriquee = rubriquee;
 	}
 
 }

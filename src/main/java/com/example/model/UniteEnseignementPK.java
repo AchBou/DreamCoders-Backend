@@ -15,7 +15,7 @@ public class UniteEnseignementPK implements Serializable {
 	@Column(name="CODE_FORMATION", insertable=false, updatable=false)
 	private String codeFormation;
 
-	@Column(name="CODE_UE")
+	@Column(name="CODE_UE", insertable=false, updatable=false)
 	private String codeUe;
 
 	public UniteEnseignementPK() {
