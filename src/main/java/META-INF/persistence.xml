@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="demo">
+		<class>com.example.model.ElementConstitutif</class>
+		<class>com.example.model.ElementConstitutifPK</class>
+		<class>com.example.model.Enseignant</class>
+		<class>com.example.model.Etudiant</class>
+		<class>com.example.model.Evaluation</class>
+		<class>com.example.model.Formation</class>
+		<class>com.example.model.Promotion</class>
+		<class>com.example.model.PromotionPK</class>
+		<class>com.example.model.Qualificatif</class>
+		<class>com.example.model.Question</class>
+		<class>com.example.model.QuestionEvaluation</class>
+		<class>com.example.model.ReponseEvaluation</class>
+		<class>com.example.model.ReponseQuestion</class>
+		<class>com.example.model.ReponseQuestionPK</class>
+		<class>com.example.model.Rubrique</class>
+		<class>com.example.model.RubriqueEvaluation</class>
+		<class>com.example.model.RubriqueQuestion</class>
+		<class>com.example.model.RubriqueQuestionPK</class>
+		<class>com.example.model.UniteEnseignement</class>
+		<class>com.example.model.UniteEnseignementPK</class>
+	</persistence-unit>
+</persistence>
