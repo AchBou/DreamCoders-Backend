@@ -20,7 +20,7 @@ public class Question implements Serializable {
 
 	private String intitule;
 
-	@Column(name="\"TYPE\"")
+	@Column(name="TYPE")
 	private String type;
 
 	//uni-directional many-to-one association to Enseignant
