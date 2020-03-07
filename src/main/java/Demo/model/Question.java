@@ -10,11 +10,13 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
+
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUE_SEQ",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
 	@Column(name="ID_QUESTION", insertable=false, updatable=false)
 	private long idQuestion;
 
@@ -22,15 +24,14 @@ public class Question implements Serializable {
 
 	@Column(name="TYPE")
 	private String type;
-
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
 	private Enseignant enseignantt;
 
 	//uni-directional many-to-one association to Qualificatif
-	@ManyToOne
-	@JoinColumn(name="ID_QUALIFICATIF", insertable=false, updatable=false)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="ID_QUALIFICATIF",referencedColumnName = "ID_QUALIFICATIF")
 	private Qualificatif qualificatiff;
 
 	public Question() {

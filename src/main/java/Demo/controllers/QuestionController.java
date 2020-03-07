@@ -4,10 +4,9 @@ import Demo.model.Question;
 
 import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -23,4 +22,9 @@ public class QuestionController {
         return QuestionService.getQuestions();
     }
 
+    @PostMapping("/Create")
+    Question CreateQuestion(@RequestBody Question newQuestion) {
+        return QuestionService.Create(newQuestion);
+
+    }
 }
