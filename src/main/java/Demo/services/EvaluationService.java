@@ -1,12 +1,12 @@
-package com.example.services;
+package Demo.services;
 
 import java.util.List;
 
+import Demo.DAO.EvaluationDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.DAO.EvaluationDAO;
-import com.example.model.Evaluation;
+import Demo.model.Evaluation;
 
 @Service
 public class EvaluationService {

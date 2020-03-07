@@ -1,4 +1,4 @@
-package com.example.model;
+package Demo.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -23,7 +23,7 @@ public class Rubrique implements Serializable {
 
 	private BigDecimal ordre;
 
-	@Column(name="\"TYPE\"")
+	@Column(name="TYPE")
 	private String type;
 
 	//uni-directional many-to-one association to Enseignant
