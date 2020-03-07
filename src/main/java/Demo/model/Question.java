@@ -69,6 +69,7 @@ public class Question implements Serializable {
 	}
 
 	public Qualificatif getQualificatiff() {
+		qualificatiff.setIdQualificatif(2);
 		return this.qualificatiff;
 	}
 
