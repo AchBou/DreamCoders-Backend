@@ -1,11 +1,11 @@
-package com.example.services;
+package Demo.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.DAO.QuestionDAO;
-import com.example.model.Question;
+import Demo.DAO.QuestionDAO;
+import Demo.model.Question;
 
 @Service
 public class QuestionService {

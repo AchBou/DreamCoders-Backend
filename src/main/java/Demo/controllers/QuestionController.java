@@ -1,8 +1,8 @@
-package com.example.controllers;
+package Demo.controllers;
 
-import com.example.model.Question;
+import Demo.model.Question;
 
-import com.example.services.QuestionService;
+import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
