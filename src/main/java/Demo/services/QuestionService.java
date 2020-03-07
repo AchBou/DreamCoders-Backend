@@ -9,11 +9,15 @@ import Demo.model.Question;
 
 @Service
 public class QuestionService {
+
     @Autowired
     QuestionDAO QuestionDao;
     public List<Question> getQuestions() {
+
         return this.QuestionDao.findAll();
     }
-
+    public Question Create(Question Qst) {
+        return this.QuestionDao.save(Qst);
+    }
 
 }
