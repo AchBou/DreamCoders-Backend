@@ -18,7 +18,7 @@ public class Rubrique implements Serializable {
 	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "RUB_SEQ",allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
 	@Column(name="ID_RUBRIQUE")
-	private long idRubrique;
+	private Integer idRubrique;
 
 	private String designation;
 
@@ -35,11 +35,11 @@ public class Rubrique implements Serializable {
 	public Rubrique() {
 	}
 
-	public long getIdRubrique() {
+	public Integer getIdRubrique() {
 		return this.idRubrique;
 	}
 
-	public void setIdRubrique(long idRubrique) {
+	public void setIdRubrique(Integer idRubrique) {
 		this.idRubrique = idRubrique;
 	}
 

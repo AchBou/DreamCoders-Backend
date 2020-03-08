@@ -1,6 +1,7 @@
 package Demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import Demo.DAO.RubriqueDAO;
 import Demo.model.Evaluation;
@@ -18,6 +19,10 @@ public class RubriqueService {
         return this.userDao.findAll();
     }
     public Rubrique CreateRubrique(Rubrique Rub) {
+        return this.userDao.save(Rub);
+    }
+    public Optional<Rubrique> FindRubrique(Integer id){return this.userDao.findById(id);}
+    public Rubrique UpdateRubrique(Rubrique Rub) {
         return this.userDao.save(Rub);
     }
 
