@@ -15,14 +15,20 @@ public class RubriqueService {
     RubriqueDAO userDao;
 
     public List<Rubrique> getAllRubriques() {
-        return this.userDao.findAll();
+        return this.userDao.Order();
     }
-    public Rubrique CreateRubrique(Rubrique Rub) {
-        return this.userDao.save(Rub);
-    }
+    public boolean UpdateRubrique(Rubrique Rub) {
+            if (this.userDao.findById(Rub.getIdRubrique()).isPresent()) {
+                 this.userDao.save(Rub);
+                return true ;
+            }
+            return false;
+        }
+
     public Optional<Rubrique> FindRubrique(Integer id){return this.userDao.findById(id);}
-    public Rubrique UpdateRubrique(Rubrique Rub) {
-        return this.userDao.save(Rub);
+    public Rubrique CreateRubrique(Rubrique Rub) {
+
+           return this.userDao.save(Rub);
     }
     public boolean Delete(Integer id) {
         if (this.userDao.findById(id).isPresent()) {
@@ -30,6 +36,12 @@ public class RubriqueService {
             return true ;
         }
         return false;
+    }
+    public boolean TestRubLink(Integer id){
+        if(this.userDao.TestRub(id).equals(0)){
+            return false;
+        }
+        return true;
     }
 
 

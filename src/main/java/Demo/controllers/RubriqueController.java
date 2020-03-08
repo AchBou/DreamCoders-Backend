@@ -1,7 +1,6 @@
 package Demo.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 
 //import javax.ws.rs.core.MediaType;
@@ -29,12 +28,17 @@ public class RubriqueController {
     public Rubrique getRubrique(@PathVariable Integer id) {
         return RubService.FindRubrique(id).get();
     }
+    @RequestMapping(value = "/linked/{id}", method = RequestMethod.GET)
+    public boolean TestRubrique(@PathVariable Integer id) {
+        return RubService.TestRubLink(id);
+    }
     @PostMapping(value = "/Create")
     public Rubrique CreateRubrique(@RequestBody Rubrique newRubrique) {
         return  RubService.CreateRubrique(newRubrique);
     }
     @PostMapping(value = "/Update")
-    public Rubrique UpdateRubrique(@RequestBody Rubrique newRubrique) {
+    public boolean UpdateRubrique(@RequestBody Rubrique newRubrique) {
+
         return  RubService.UpdateRubrique(newRubrique);
     }
     @DeleteMapping (value = "/Supprimer/{id}")
