@@ -18,7 +18,7 @@ public class Question implements Serializable {
 	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUE_SEQ",allocationSize=1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
 	@Column(name="ID_QUESTION", insertable=false, updatable=false)
-	private long idQuestion;
+	private Integer idQuestion;
 
 	private String intitule;
 
@@ -37,11 +37,11 @@ public class Question implements Serializable {
 	public Question() {
 	}
 
-	public long getIdQuestion() {
+	public Integer getIdQuestion() {
 		return this.idQuestion;
 	}
 
-	public void setIdQuestion(long idQuestion) {
+	public void setIdQuestion(Integer idQuestion) {
 		this.idQuestion = idQuestion;
 	}
 
@@ -70,7 +70,6 @@ public class Question implements Serializable {
 	}
 
 	public Qualificatif getQualificatiff() {
-		qualificatiff.setIdQualificatif(2);
 		return this.qualificatiff;
 	}
 
