@@ -25,7 +25,7 @@ public class RubriqueService {
     public Rubrique UpdateRubrique(Rubrique Rub) {
         return this.userDao.save(Rub);
     }
-
+    public void Delete(Integer id) { this.userDao.deleteById(id);}
 
 
 
