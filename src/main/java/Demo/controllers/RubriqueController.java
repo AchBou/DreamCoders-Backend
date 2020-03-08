@@ -38,9 +38,10 @@ public class RubriqueController {
         return  RubService.UpdateRubrique(newRubrique);
     }
     @DeleteMapping (value = "/Supprimer/{id}")
-    public void RubriqueQuestion(@PathVariable int id) {
+    public boolean RubriqueQuestion(@PathVariable int id) {
 
-        RubService.Delete(id);
+
+        return RubService.Delete(id);
     }
 
 

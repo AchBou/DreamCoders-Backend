@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import Demo.DAO.RubriqueDAO;
-import Demo.model.Evaluation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,13 @@ public class RubriqueService {
     public Rubrique UpdateRubrique(Rubrique Rub) {
         return this.userDao.save(Rub);
     }
-    public void Delete(Integer id) { this.userDao.deleteById(id);}
+    public boolean Delete(Integer id) {
+        if (this.userDao.findById(id).isPresent()) {
+            this.userDao.deleteById(id);
+            return true ;
+        }
+        return false;
+    }
 
 
 
