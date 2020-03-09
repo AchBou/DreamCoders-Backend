@@ -11,9 +11,21 @@ import java.util.List;
 
 @Repository
 public interface QuestionDAO  extends JpaRepository<Question , Integer> {
-    @Query("SELECT d "
-            + "FROM Question d INNER JOIN d.qualificatiff e ORDER BY e.minimal ASC ")
+    @Query( "SELECT d "
+            + "FROM Question d INNER JOIN d.qualificatiff e ORDER BY  e.minimal ASC ")
     public List<Question> ListerparOrdre();
+
+    @Query("SELECT d from Question d,RubriqueQuestion r WHERE" +
+            " d.idQuestion = :idQuestion AND " +
+            " d.idQuestion = r.questionn.idQuestion")
+    public List<Question> FindQstInRub(Integer idQuestion);
+
+
+
+
+
+
+
 
 
     @Transactional
@@ -24,4 +36,8 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
     Question updateQuestion(@Param("QuestionId") int QuestionId, @Param("enseignantt") String enseignantt,
                             @Param("type") String type ,@Param("intitule") String intitule ,
                             @Param("minimal") String minimal, @Param("maximal") String maximal );
+
+
+
+
 }

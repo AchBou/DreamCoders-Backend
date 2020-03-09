@@ -28,7 +28,14 @@ public class QuestionController {
         return QuestionService.getQuestions();
     }
 
-    @GetMapping("UneQuestion/{id}")
+    @GetMapping(value = "/FindifinRub/{id}")
+    public List<Question> getFindifinRub(@PathVariable Integer id)
+
+    {
+        return QuestionService.findQstifinRub(id);
+    }
+
+    @GetMapping("/UneQuestion/{id}")
     public Optional<Question> getQuestion(@PathVariable  Integer id)
     {
         return QuestionService.findById(id);
@@ -46,7 +53,7 @@ public class QuestionController {
 
 
     @PutMapping("/QuestionModify/{id}")
-    Question replaceEmployee(@RequestBody Question NvQ, @PathVariable Integer id) {
+    Question replaceQuestion(@RequestBody Question NvQ, @PathVariable Integer id) {
 
         return QuestionService.findById(id)
                 .map(Qst -> {
@@ -63,8 +70,8 @@ public class QuestionController {
     }
 
     @DeleteMapping (value = "/Supprimer/{id}")
-    public void SupprimerQuestion(@PathVariable int id) {
+    public boolean SupprimerQuestion(@PathVariable int id) {
 
-        QuestionService.Supprimer(id);
+       return QuestionService.Supprimer(id);
     }
     }

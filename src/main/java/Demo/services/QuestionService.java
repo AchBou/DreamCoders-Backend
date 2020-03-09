@@ -33,14 +33,19 @@ public class QuestionService {
 
         return this.QuestionDao.findById(id);
     }
-
+    public List<Question> findQstifinRub(Integer id){
+        return  this.QuestionDao.FindQstInRub(id);
+    }
     public void update(Question qst) {
         QuestionDao.save(qst);
     }
 
-    public void Supprimer(Integer id) {
-
+    public boolean Supprimer(Integer id) {
+if(this.QuestionDao.findById(id).isPresent()){
         this.QuestionDao.deleteById(id);
+return true;
     }
+    return false;
+}
 
 }
