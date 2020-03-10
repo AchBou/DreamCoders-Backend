@@ -48,6 +48,11 @@ public class Enseignant implements Serializable {
 
 	public Enseignant() {
 	}
+	public Enseignant(String prenom, String nom) {
+		super();
+		this.prenom = prenom;
+		this.nom = nom;
+	}
 
 	public long getNoEnseignant() {
 		return this.noEnseignant;

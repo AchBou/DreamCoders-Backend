@@ -1,5 +1,7 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -44,7 +46,9 @@ public class Evaluation implements Serializable {
 		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
-	private ElementConstitutif elementConstitutiff;
+    @JsonIgnoreProperties(value = { "evaluations" })
+
+    private ElementConstitutif elementConstitutiff;
 
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
@@ -65,7 +69,9 @@ public class Evaluation implements Serializable {
 		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
-	private UniteEnseignement uniteEnseignementt;
+    @JsonIgnoreProperties(value = { "evaluations" })
+
+    private UniteEnseignement uniteEnseignementt;
 
 	public Evaluation() {
 	}

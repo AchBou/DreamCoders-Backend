@@ -1,8 +1,10 @@
 package Demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Demo.DAO.EvaluationDAO;
+import Demo.modelPerso.ListeEvalForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Demo.model.Evaluation;
@@ -12,7 +14,8 @@ public class EvaluationService {
 	 @Autowired
      EvaluationDAO userDao;
  
-     public List<Evaluation> getAllEvals() {
+     public List<Evaluation> getAllEvals()
+     {
          return this.userDao.findAll();
      }
  

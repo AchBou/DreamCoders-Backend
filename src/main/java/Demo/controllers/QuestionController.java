@@ -3,6 +3,7 @@ package Demo.controllers;
 import Demo.DAO.QuestionDAO;
 import Demo.model.Question;
 
+import Demo.model.Rubrique;
 import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/Question")
+@RequestMapping("/question")
 public class QuestionController {
     @Autowired
     QuestionService QuestionService;
@@ -28,43 +29,41 @@ public class QuestionController {
         return QuestionService.getQuestions();
     }
 
-    @GetMapping("UneQuestion/{id}")
+
+    @GetMapping("/{id}")
     public Optional<Question> getQuestion(@PathVariable  Integer id)
     {
         return QuestionService.findById(id);
     }
 
-    @RequestMapping("/AllbyOrdreMinimalQual")
-    public List<Question> getAllQuestionsbytype()
+    @GetMapping("/qstinrub/{id}")
+    public Question getQuestionInRub(@PathVariable  Integer id)
     {
-        return QuestionService.getQuestionordre();
+        return QuestionService.findQuestifExistinRub(id);
     }
-    @PostMapping("/Create")
+
+    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    public String Existornoo(@PathVariable Integer id) {
+        return QuestionService.Existorno(id);
+    }
+
+    @PostMapping("/create")
     Question CreateQuestion(@RequestBody Question newQuestion) {
         return QuestionService.Create(newQuestion);
     }
 
 
-    @PutMapping("/QuestionModify/{id}")
-    Question replaceEmployee(@RequestBody Question NvQ, @PathVariable Integer id) {
 
-        return QuestionService.findById(id)
-                .map(Qst -> {
-                    Qst.setEnseignantt(NvQ.getEnseignantt());
-                    Qst.setType(NvQ.getType());
-                    Qst.setIntitule(NvQ.getIntitule());
-                    Qst.setQualificatiff(NvQ.getQualificatiff());
-                    return QuestionService.Create(Qst);
-                })
-                .orElseGet(() -> {
-                    NvQ.setIdQuestion(id);
-                    return QuestionService.Create(NvQ);
-                });
+    @PostMapping(value = "/update")
+    public boolean updateQst(@RequestBody Question nvqst) {
+
+        return  QuestionService.UpdateQuestion(nvqst);
     }
 
-    @DeleteMapping (value = "/Supprimer/{id}")
-    public void SupprimerQuestion(@PathVariable int id) {
+    @DeleteMapping (value = "/supprimer/{id}")
 
-        QuestionService.Supprimer(id);
+    public void supprimerQuestion(@PathVariable int id) {
+
+        QuestionService.supprimer(id);
     }
     }
