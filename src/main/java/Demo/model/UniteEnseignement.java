@@ -1,5 +1,7 @@
 package Demo.model;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,6 +38,7 @@ public class UniteEnseignement implements Serializable {
 
 	//bi-directional many-to-one association to Evaluation
 	@OneToMany(mappedBy="uniteEnseignementt")
+	@JsonIgnore
 	private List<Evaluation> evaluations;
 
 	//uni-directional many-to-one association to Enseignant
