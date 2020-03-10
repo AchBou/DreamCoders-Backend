@@ -25,6 +25,11 @@ public class Qualificatif implements Serializable {
 
 	public Qualificatif() {
 	}
+	public Qualificatif(String mina, String maxa) {
+		super();
+		this.minimal = mina;
+		this.maximal = maxa;
+	}
 
 	public long getIdQualificatif() {
 		return this.idQualificatif;
