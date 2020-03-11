@@ -36,6 +36,21 @@ public class Question implements Serializable {
 
 	public Question() {
 	}
+	public Question(String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
+		super();
+		this.intitule = intitule;
+		this.type = type;
+		this.enseignantt = enseignant;
+		this.qualificatiff= qualificatif;
+	}
+	public Question(int id,String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
+		super();
+		this.idQuestion = id;
+		this.intitule = intitule;
+		this.type = type;
+		this.enseignantt = enseignant;
+		this.qualificatiff = qualificatif;
+	}
 
 	public Integer getIdQuestion() {
 		return this.idQuestion;

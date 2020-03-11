@@ -1,5 +1,6 @@
 package Demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Demo.DAO.EvaluationDAO;
@@ -12,7 +13,8 @@ public class EvaluationService {
 	 @Autowired
      EvaluationDAO userDao;
  
-     public List<Evaluation> getAllEvals() {
+     public List<Evaluation> getAllEvals()
+     {
          return this.userDao.findAll();
      }
  

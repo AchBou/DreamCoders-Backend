@@ -1,14 +1,10 @@
 package Demo.services;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import Demo.DAO.QuestionDAO;
 import Demo.model.Question;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class QuestionService {
@@ -34,11 +30,29 @@ public class QuestionService {
         return this.QuestionDao.findById(id);
     }
 
+    public Question findQuestifExistinRub(Integer id) {
+
+        return this.QuestionDao.FindQstInRub(id);
+    }
+    public boolean UpdateQuestion(Question qq) {
+        if (this.QuestionDao.findById(qq.getIdQuestion()).isPresent()) {
+            this.QuestionDao.save(qq);
+            return true ;
+        }
+        return false;
+    }
+    public String Existorno(Integer id){
+        if(this.QuestionDao.Existorno(id).equals(0)){
+            return "no Exist";
+        }
+        return "Exist";
+    }
+
     public void update(Question qst) {
         QuestionDao.save(qst);
     }
 
-    public void Supprimer(Integer id) {
+    public void supprimer(Integer id) {
 
         this.QuestionDao.deleteById(id);
     }
