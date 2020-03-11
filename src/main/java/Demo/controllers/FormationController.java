@@ -48,7 +48,7 @@ public class FormationController {
     
     @RequestMapping(value = "{code_formation}/ue", method = RequestMethod.GET)
     public Response getUEByForm(@PathVariable("code_formation") String codeForm) {
-        List<UniteEnseignementPK> uniteEnseignementPK = ueService.findPromoByFormation(codeForm);
+        List<UniteEnseignementPK> uniteEnseignementPK = ueService.findUEByFormation(codeForm);
         return Response
                 .status(Response.Status.OK)
                 .entity(uniteEnseignementPK)
