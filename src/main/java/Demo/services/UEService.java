@@ -17,7 +17,7 @@ public class UEService {
     UEDAO  ueDAO;
     // liste d'unités d'enseignement par formation
 
-    public List<UniteEnseignementPK> findPromoByFormation(String codeFormation){
+    public List<UniteEnseignementPK> findUEByFormation(String codeFormation){
         List<UniteEnseignementPK> listUnitesEnseignement = new ArrayList<>();
         List<UniteEnseignement> listUnitesEnseignementByForm = ueDAO.findByCodeFormation(codeFormation);
 
