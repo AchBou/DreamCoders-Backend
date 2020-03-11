@@ -2,6 +2,7 @@ package Demo.controllers;
 
 import Demo.model.Formation;
 import Demo.model.PromotionPK;
+import Demo.model.UniteEnseignement;
 import Demo.model.UniteEnseignementPK;
 import Demo.modelPerso.FormationPers;
 import Demo.services.FormationService;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/form")
+@CrossOrigin
 public class FormationController {
     @Autowired
     FormationService formationService;
@@ -30,7 +32,7 @@ public class FormationController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
 
     public Response getAllFormations() {
-        List<FormationPers> listFormation = formationService.getAllFormations();
+        List<Formation> listFormation = formationService.getAllFormations();
         return Response
                 .status(Response.Status.OK)
                 .entity(listFormation)
@@ -48,10 +50,10 @@ public class FormationController {
     
     @RequestMapping(value = "{code_formation}/ue", method = RequestMethod.GET)
     public Response getUEByForm(@PathVariable("code_formation") String codeForm) {
-        List<UniteEnseignementPK> uniteEnseignementPK = ueService.findUEByFormation(codeForm);
+        List<UniteEnseignement> uniteEnseignement = ueService.findUEByFormation(codeForm);
         return Response
                 .status(Response.Status.OK)
-                .entity(uniteEnseignementPK)
+                .entity(uniteEnseignement)
                 .build();
     }
 }
