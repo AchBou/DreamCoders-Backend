@@ -14,8 +14,8 @@ public class Qualificatif implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUA_SEQ",allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@SequenceGenerator(name = "SequenceIdGenerator2", sequenceName = "QUA_SEQ",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator2")
 	@Column(name="ID_QUALIFICATIF")
 	private Integer idQualificatif;
 

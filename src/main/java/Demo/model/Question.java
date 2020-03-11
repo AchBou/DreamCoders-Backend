@@ -15,8 +15,8 @@ public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUE_SEQ",allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator1")
+	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "QUE_SEQ",allocationSize=1)
 	@Column(name="ID_QUESTION", insertable=false, updatable=false)
 	private Integer idQuestion;
 
