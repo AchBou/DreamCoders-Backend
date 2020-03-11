@@ -42,7 +42,7 @@ public class QuestionController {
         return QuestionService.findQuestifExistinRub(id);
     }
 
-    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/searchinrub/{id}", method = RequestMethod.GET)
     public String Existornoo(@PathVariable Integer id) {
         return QuestionService.Existorno(id);
     }
