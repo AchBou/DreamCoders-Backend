@@ -26,21 +26,21 @@ public class Question implements Serializable {
 	private String type;
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	@JoinColumn(name="NO_ENSEIGNANT",referencedColumnName = "NO_ENSEIGNANT")
 	private Enseignant enseignantt;
 
 	//uni-directional many-to-one association to Qualificatif
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATIF",referencedColumnName = "ID_QUALIFICATIF")
 	private Qualificatif qualificatiff;
 
 	public Question() {
 	}
-	public Question(String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
+	public Question(String intitule, String type, Enseignant enseignant,Qualificatif qualificatif) {
 		super();
 		this.intitule = intitule;
 		this.type = type;
-		this.enseignantt = enseignant;
+		this.enseignantt=enseignant;
 		this.qualificatiff= qualificatif;
 	}
 	public Question(int id,String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
