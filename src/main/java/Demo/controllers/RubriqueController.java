@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,31 +23,39 @@ public class RubriqueController {
     RubriqueService RubService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Rubrique> getAllRubriques() {
-        return RubService.getAllRubriques();
+    public ResponseEntity<List<Rubrique>> getAllRubriques() {
+        return  new ResponseEntity<>(  RubService.getAllRubriques(), HttpStatus.OK);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Rubrique getRubrique(@PathVariable Integer id) {
-        return RubService.FindRubrique(id).get();
+    public ResponseEntity<Rubrique> getRubrique(@PathVariable Integer id) {
+        try{
+
+        return  new ResponseEntity<>( RubService.FindRubrique(id).get(), HttpStatus.OK);}
+        catch(java.util.NoSuchElementException e){
+        return  new ResponseEntity<>( new Rubrique(), HttpStatus.NOT_FOUND);
+        }
     }
     @RequestMapping(value = "/linked/{id}", method = RequestMethod.GET)
-    public boolean TestRubrique(@PathVariable Integer id) {
-        return RubService.TestRubLink(id);
-    }
-    @PostMapping(value = "/Create")
-    public Rubrique CreateRubrique(@RequestBody Rubrique newRubrique) {
-        return  RubService.CreateRubrique(newRubrique);
-    }
-    @PostMapping(value = "/Update")
-    public boolean UpdateRubrique(@RequestBody Rubrique newRubrique) {
+    public ResponseEntity<Boolean> TestRubrique(@PathVariable Integer id) {
+        return  new ResponseEntity<>( RubService.TestRubLink(id), HttpStatus.OK);
 
-        return  RubService.UpdateRubrique(newRubrique);
     }
-    @DeleteMapping (value = "/Supprimer/{id}")
-    public boolean RubriqueQuestion(@PathVariable int id) {
+    @PostMapping(value = "/create")
+    public ResponseEntity<Rubrique> CreateRubrique(@RequestBody Rubrique newRubrique) {
+        return  new ResponseEntity<>( RubService.CreateRubrique(newRubrique), HttpStatus.OK);
+
+    }
+    @PostMapping(value = "/update")
+    public ResponseEntity<Boolean> UpdateRubrique(@RequestBody Rubrique newRubrique) {
+        return  new ResponseEntity<>( RubService.UpdateRubrique(newRubrique), HttpStatus.OK);
 
 
-        return RubService.Delete(id);
+    }
+    @DeleteMapping (value = "/supprimer/{id}")
+    public ResponseEntity<Boolean> RubriqueQuestion(@PathVariable int id) {
+
+        return  new ResponseEntity<>( RubService.Delete(id), HttpStatus.OK);
+
     }
 
 
