@@ -3,6 +3,7 @@ package Demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import Demo.DAO.QuestionDAO;
 import Demo.DAO.RubriqueDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ import Demo.model.Rubrique;
 public class RubriqueService {
     @Autowired
     RubriqueDAO userDao;
+    private final RubriqueDAO RubDao;
+    public RubriqueService(RubriqueDAO RubDao) {
+        this.RubDao = RubDao;
+    }
 
     public List<Rubrique> getAllRubriques() {
         return this.userDao.Order();
@@ -25,7 +30,14 @@ public class RubriqueService {
             return false;
         }
 
-    public Optional<Rubrique> FindRubrique(Integer id){return this.userDao.findById(id);}
+    public Optional<Rubrique> FindRubrique(Integer id){
+        if (this.userDao.findById(id).isPresent()) {
+
+            return this.userDao.findById(id);
+
+    }
+        return Optional.empty();
+    }
     public Rubrique CreateRubrique(Rubrique Rub) {
 
            return this.userDao.save(Rub);

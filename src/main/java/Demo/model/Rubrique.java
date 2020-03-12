@@ -29,10 +29,25 @@ public class Rubrique implements Serializable {
 
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	@JoinColumn(name="NO_ENSEIGNANT")
 	private Enseignant enseignantt;
 
 	public Rubrique() {
+	}
+	public Rubrique(String type, String designation, Enseignant enseignant,BigDecimal ordre) {
+		super();
+		this.type = type;
+		this.enseignantt = enseignant;
+		this.designation = designation;
+		this.ordre = ordre;
+	}
+	public Rubrique(int id,String type, String designation, Enseignant enseignant,BigDecimal ordre ) {
+		super();
+		this.idRubrique = id;
+		this.type = type;
+		this.enseignantt = enseignant;
+		this.designation = designation;
+		this.ordre = ordre;
 	}
 
 	public Integer getIdRubrique() {
