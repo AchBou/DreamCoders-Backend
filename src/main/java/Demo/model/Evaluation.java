@@ -1,5 +1,6 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -18,7 +19,8 @@ public class Evaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator1")
+	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "EVE_SEQ",allocationSize=1)
 	@Column(name="ID_EVALUATION")
 	private long idEvaluation;
 
@@ -26,8 +28,10 @@ public class Evaluation implements Serializable {
 	@Column(name="DEBUT_REPONSE")
 	private Date debutReponse;
 
+	@Column(name="DESIGNATION")
 	private String designation;
 
+	@Column(name="ETAT")
 	private String etat;
 
 	@Temporal(TemporalType.DATE)
@@ -37,7 +41,24 @@ public class Evaluation implements Serializable {
 	@Column(name="NO_EVALUATION")
 	private BigDecimal noEvaluation;
 
+	@Column(name="PERIODE")
 	private String periode;
+
+	@Column(name="ANNEE_UNIVERSITAIRE")
+	@JsonIgnore
+	String anne_Universitaire;
+
+	@Column(name = "CODE_UE")
+	@JsonIgnore
+	String code_eu;
+
+	@Column(name = "CODE_EC")
+	@JsonIgnore
+	String code_ec;
+
+	@Column(name = "CODE_FORMATION")
+	@JsonIgnore
+	String code_formation;
 
 	//uni-directional many-to-one association to ElementConstitutif
 	@ManyToOne
@@ -52,7 +73,8 @@ public class Evaluation implements Serializable {
 
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	@JoinColumn(name="NO_ENSEIGNANT")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Enseignant enseignantt;
 
 	//uni-directional many-to-one association to Promotion
@@ -130,6 +152,38 @@ public class Evaluation implements Serializable {
 
 	public void setPeriode(String periode) {
 		this.periode = periode;
+	}
+
+	public String getAnne_Universitaire() {
+		return anne_Universitaire;
+	}
+
+	public void setAnne_Universitaire(String anne_Universitaire) {
+		this.anne_Universitaire = anne_Universitaire;
+	}
+
+	public String getCode_eu() {
+		return code_eu;
+	}
+
+	public void setCode_eu(String code_eu) {
+		this.code_eu = code_eu;
+	}
+
+	public String getCode_ec() {
+		return code_ec;
+	}
+
+	public void setCode_ec(String code_ec) {
+		this.code_ec = code_ec;
+	}
+
+	public String getCode_formation() {
+		return code_formation;
+	}
+
+	public void setCode_formation(String code_formation) {
+		this.code_formation = code_formation;
 	}
 
 	public ElementConstitutif getElementConstitutiff() {
