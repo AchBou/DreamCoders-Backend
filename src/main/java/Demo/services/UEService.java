@@ -17,35 +17,20 @@ public class UEService {
     UEDAO  ueDAO;
     // liste d'unités d'enseignement par formation
 
-    public List<UniteEnseignementPK> findUEByFormation(String codeFormation){
-        List<UniteEnseignementPK> listUnitesEnseignement = new ArrayList<>();
+    public List<UniteEnseignement> findUEByFormation(String codeFormation){
         List<UniteEnseignement> listUnitesEnseignementByForm = ueDAO.findByCodeFormation(codeFormation);
 
-        for(UniteEnseignement uniteEnseignement : listUnitesEnseignementByForm){
-        	UniteEnseignementPK uniteEnseignementPK= new UniteEnseignementPK();
-        	uniteEnseignementPK.setCodeFormation(uniteEnseignement.getId().getCodeFormation());
-        	uniteEnseignementPK.setCodeUe(uniteEnseignement.getId().getCodeUe());
-            listUnitesEnseignement.add(uniteEnseignementPK);
-        }
-       return listUnitesEnseignement;
+       return listUnitesEnseignementByForm;
     }
     
-    public List<ElementConstitutifPK> findECByUE(String codeUE){
-        List<ElementConstitutifPK> listElementsConstitutifs = new ArrayList<>();
+    public List<ElementConstitutif> findECByUE(String codeUE){
         List<ElementConstitutif> listElementsConstitutifsByUE = ueDAO.findECByCodeUE(codeUE);
 
-        for(ElementConstitutif elementConstitutif : listElementsConstitutifsByUE){
-        	ElementConstitutifPK elementConstitutifPK= new ElementConstitutifPK();
-        	elementConstitutifPK.setCodeFormation(elementConstitutif.getId().getCodeFormation());
-        	elementConstitutifPK.setCodeUe(elementConstitutif.getId().getCodeUe());
-        	elementConstitutifPK.setCodeEc(elementConstitutif.getId().getCodeEc());
-            listElementsConstitutifs.add(elementConstitutifPK);
-        }
-       return listElementsConstitutifs;
+       return listElementsConstitutifsByUE;
     }
     
-    public List<UniteEnseignementPK> findAllUEs() {
-    	List<UniteEnseignementPK> listUnitesEnseignement = new ArrayList<>();
+    public List<UniteEnseignement> findAllUEs() {
+    	List<UniteEnseignement> listUnitesEnseignement = new ArrayList<>();
     	return listUnitesEnseignement;
     }
 }

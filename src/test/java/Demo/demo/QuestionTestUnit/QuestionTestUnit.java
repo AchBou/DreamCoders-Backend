@@ -1,4 +1,4 @@
-package Demo.demo;
+package Demo.demo.QuestionTestUnit;
 import Demo.DAO.EnseignantDAO;
 import Demo.DAO.QualificatifDAO;
 import Demo.DAO.QuestionDAO;
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
-public class DemoApplicationTests  {
+public class QuestionTestUnit {
 
    // private QuestionService userRepository ;
     private QuestionDAO qstdao;

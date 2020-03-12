@@ -1,10 +1,6 @@
 package Demo.controllers;
 
-import Demo.model.ElementConstitutifPK;
-import Demo.model.Formation;
-import Demo.model.PromotionPK;
-import Demo.model.UniteEnseignement;
-import Demo.model.UniteEnseignementPK;
+import Demo.model.*;
 import Demo.modelPerso.FormationPers;
 import Demo.services.FormationService;
 import Demo.services.PromotionService;
@@ -18,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/form")
+@RequestMapping("/ue")
+@CrossOrigin
 public class UEController {
     @Autowired
     UEService ueService;
@@ -34,11 +31,13 @@ public class UEController {
     } */
     
     
-    @RequestMapping(value = "ue/{code_ue}/ec", method = RequestMethod.GET)
+    @RequestMapping(value = "{code_ue}/ec", method = RequestMethod.GET)
     public Response getECByCodeUE(@PathVariable("code_ue") String codeUE) {
-        List<ElementConstitutifPK> listeUnitesEnseignement = ueService.findECByUE(codeUE);
+        Response.Status s = Response.Status.OK;
+        List<ElementConstitutif> listeUnitesEnseignement = ueService.findECByUE(codeUE);
+        if(listeUnitesEnseignement.isEmpty()) s = Response.Status.NOT_FOUND;
         return Response
-                .status(Response.Status.OK)
+                .status(s)
                 .entity(listeUnitesEnseignement)
                 .build();
     }

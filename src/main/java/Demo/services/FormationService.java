@@ -15,14 +15,7 @@ public class FormationService {
     @Autowired
     FormationDAO formationDAO;
     //Liste de toute les formations
-    public List<FormationPers> getAllFormations(){
-        List<FormationPers> listFormationsPers = new ArrayList<>();
+    public List<Formation> getAllFormations(){
         List<Formation> listFormations = formationDAO.findAll();
-        for(Formation formation : listFormations){
-            FormationPers formationPers = new FormationPers();
-            formationPers.setNomFormation(formation.getNomFormation());
-            formationPers.setCodeFormation(formation.getCodeFormation());
-            listFormationsPers.add(formationPers);
-        }
-        return listFormationsPers;}
+        return listFormations;}
 }
