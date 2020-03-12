@@ -2,11 +2,9 @@ package Demo.services;
 
 import Demo.DAO.FormationDAO;
 import Demo.model.Formation;
-import Demo.modelPerso.FormationPers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

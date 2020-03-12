@@ -1,16 +1,12 @@
 package Demo.controllers;
 
 import Demo.model.*;
-import Demo.modelPerso.FormationPers;
-import Demo.services.FormationService;
-import Demo.services.PromotionService;
 import Demo.services.UEService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

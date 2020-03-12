@@ -20,6 +20,10 @@ public class PromotionPK implements Serializable {
 
 	public PromotionPK() {
 	}
+	public PromotionPK(String anneeUniversitaire, String codeFormation) {
+		this.anneeUniversitaire=anneeUniversitaire;
+		this.codeFormation=codeFormation;
+	}
 	public String getAnneeUniversitaire() {
 		return this.anneeUniversitaire;
 	}

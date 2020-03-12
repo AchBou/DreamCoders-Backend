@@ -1,6 +1,9 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -45,6 +48,10 @@ public class Enseignant implements Serializable {
 	private String type;
 
 	private String ville;
+
+	@OneToMany(mappedBy = "enseignantt")
+	@JsonIgnoreProperties(value = "enseignantt")
+	private List<Evaluation> evaluations;
 
 	public Enseignant() {
 	}

@@ -5,18 +5,19 @@ import java.util.List;
 
 //import javax.ws.rs.core.MediaType;
 
+import Demo.modelPerso.EvaluationPers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
+
+import javax.ws.rs.core.Response;
 
 
 @RestController
@@ -34,12 +35,16 @@ public class EvaluationController {
         return evaService.getAllEvals();
     }
 
-    /* @RequestMapping(value = "/adduser", method = RequestMethod.POST,
+    @RequestMapping(value = "/add", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody()
-    public EvaluationService addNewUser(@RequestBody Evaluation eva) {
-        return this.evaService.addUser(eva);
-    } */
+    @ResponseBody
+    public Response addEval(@RequestBody EvaluationPers eva) {
+        Evaluation ev = this.evaService.addUser(eva);
+        if(ev==null){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        return Response.ok(ev).build();
+    }
     
 
 
