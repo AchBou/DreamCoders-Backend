@@ -51,7 +51,8 @@ public class QuestionTestUnit {
         Question sauvq1 =questionService.Create(Q1);
         sauvq1.setIntitule("Mod");
         questionService.update(sauvq1);
-        assertSame("Mod",sauvq1.getIntitule());
+        assert(questionService.findById(sauvq1.getIdQuestion()).get().getIntitule().equals(sauvq1.getIntitule()));
+       // assertSame("Mod",sauvq1.getIntitule());
 
     }
 
@@ -60,6 +61,7 @@ public class QuestionTestUnit {
         Question qstinrub = questionService.findQuestifExistinRub(9);
         assertSame(9, qstinrub.getIdQuestion());
     }
+
 
     @Test
     public void TestDeleteQuestion() {

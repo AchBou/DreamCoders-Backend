@@ -9,7 +9,7 @@ import Demo.model.Question;
 @Service
 public class QuestionService {
 
-
+    @Autowired
     private final QuestionDAO questionDao;
     public QuestionService(QuestionDAO questionDao) {
         this.questionDao = questionDao;
@@ -49,14 +49,22 @@ public class QuestionService {
         }
         return "Exist";
     }
+    public String FindQstinEva(Integer id){
+        if(this.questionDao.FindQstInEval(id) == null){
+            return "no Exist in eva";
+        }
+        return "Exist in eva";
+    }
 
     public void update(Question qst) {
         questionDao.save(qst);
     }
 
-    public void supprimer(Integer id) {
+    public Boolean supprimer(Integer id) {
 
         this.questionDao.deleteById(id);
+        return true;
     }
+
 
 }

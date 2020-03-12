@@ -18,6 +18,10 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
             " d.idQuestion = :idQuestion AND " +
             " d.idQuestion = r.questionn.idQuestion")
     public Question FindQstInRub(Integer idQuestion);
+    @Query("SELECT d from Question d,QuestionEvaluation qe WHERE" +
+            " d.idQuestion = :idQuestion AND " +
+            " d.idQuestion = qe.questionn.idQuestion")
+    public Question FindQstInEval(Integer idQuestion);
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query("UPDATE Question c SET c.enseignantt.prenom = :enseignantt ," +
