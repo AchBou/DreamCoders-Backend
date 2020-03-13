@@ -49,11 +49,11 @@ public class QuestionService {
         }
         return "Exist";
     }
-    public String FindQstinEva(Integer id){
+    public boolean FindQstinEva(Integer id){
         if(this.questionDao.FindQstInEval(id) == null){
-            return "no Exist in eva";
+            return false;
         }
-        return "Exist in eva";
+        return true;
     }
 
     public void update(Question qst) {

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -25,7 +25,7 @@ public class QuestionController {
         try{
 
             return  new ResponseEntity<>( QuestionService.findById(id).get(), HttpStatus.OK);}
-        catch(java.util.NoSuchElementException e){
+        	catch(java.util.NoSuchElementException e){
             return  new ResponseEntity<>(new Question(), HttpStatus.NOT_FOUND);
         }
     }
@@ -38,7 +38,7 @@ public class QuestionController {
 
 
     @RequestMapping(value = "/findqstinEva/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> findQstinEva(@PathVariable Integer id)
+    public ResponseEntity<Boolean> findQstinEva(@PathVariable Integer id)
     {
         return  new ResponseEntity<> ( QuestionService.FindQstinEva(id), HttpStatus.OK);
 
@@ -55,7 +55,6 @@ public class QuestionController {
         return  new ResponseEntity<>( QuestionService.UpdateQuestion(nvqst), HttpStatus.OK);
 
     }
-
 
 
     @DeleteMapping (value = "/supprimer/{id}")

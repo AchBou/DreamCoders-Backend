@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import Demo.model.Rubrique;
 import Demo.services.RubriqueService;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/rubrique")
 public class RubriqueController {
