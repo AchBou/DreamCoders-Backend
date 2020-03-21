@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotAllowedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 
@@ -36,11 +39,19 @@ public class EvaluationController {
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Response addEval(@RequestBody EvaluationPers eva) {
-        Evaluation ev = this.evaService.addUser(eva);
-        if(ev==null){
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            Evaluation ev = this.evaService.addUser(eva);
+            return Response.ok(ev).build();
         }
-        return Response.ok(ev).build();
+        catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+        catch (BadRequestException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+        catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
     }
     
 

@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotAllowedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 
@@ -26,6 +29,8 @@ public class EvaluationService {
 	 UEDAO ueDao;
     @Autowired
 	 PromotionDAO promDao;
+    @Autowired
+    PromotionService promService;
 
      public List<Evaluation> getAllEvals()
      {
@@ -43,14 +48,23 @@ public class EvaluationService {
          evaluation.setNoEvaluation(eva.getNo_evaluantion());
          evaluation.setPeriode(eva.getPeriode());
          evaluation.setEtat(eva.getEtat());
-         evaluation.setAnne_Universitaire(eva.getAnnee_universitaire());
          evaluation.setCode_formation(eva.getCode_formation());
          evaluation.setCode_eu(eva.getCode_ue());
          evaluation.setCode_ec(eva.getCode_ec());
+         Promotion p = this.promService.getCurrentPromo(eva.getCode_formation());
+         if(p!=null){
+             evaluation.setPromotionn(p);
+         }
+         else{
+             throw new NotFoundException("Aucune promotion actuelle de la formation que vous avez choisie");
+         }
          try{
              evaluation = evalDao.save(evaluation);
          }catch (Exception ex){
-             return null;
+             if(ex.getMessage().contains("EVE_EVE_UK")){
+                 throw new BadRequestException("Cette evaluation existe deja");
+             }
+             throw ex;
          }
          return evaluation;
      }
