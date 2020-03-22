@@ -21,5 +21,22 @@
 		<class>Demo.model.RubriqueQuestionPK</class>
 		<class>Demo.model.UniteEnseignement</class>
 		<class>Demo.model.UniteEnseignementPK</class>
+        <class>Demo.model.views.VDiplome</class>
+		<class>Demo.model.views.VEtatEvaluation</class>
+		<class>Demo.model.views.VListeSelection</class>
+		<class>Demo.model.views.VOuiNon</class>
+		<class>Demo.model.views.VPays</class>
+		<class>Demo.model.views.VPositionnement</class>
+		<class>Demo.model.views.VProcessusStage</class>
+		<class>Demo.model.views.VSalle</class>
+		<class>Demo.model.views.VSemestre</class>
+		<class>Demo.model.views.VSexe</class>
+		<class>Demo.model.views.VTypeEnseignant</class>
+		<class>Demo.model.views.VUniversite</class>
+		<properties>
+			<property name="hibernate.connection.url"
+					  value="jdbc:oracle:thin:@spi.cvwrdqoai1p0.us-east-1.rds.amazonaws.com:1521:ORCL"/>
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
+		</properties>
 	</persistence-unit>
 </persistence>

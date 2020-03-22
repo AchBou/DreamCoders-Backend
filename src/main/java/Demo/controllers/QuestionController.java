@@ -1,22 +1,13 @@
 package Demo.controllers;
-
-import Demo.DAO.QuestionDAO;
 import Demo.model.Question;
-
-import Demo.model.Rubrique;
 import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.print.attribute.standard.Media;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -24,46 +15,52 @@ public class QuestionController {
     QuestionService QuestionService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<Question> getAllQuestions()
+    public ResponseEntity<List<Question>> getAllQuestions()
     {
-        return QuestionService.getQuestions();
+        return  new ResponseEntity<>(  QuestionService.getQuestions(), HttpStatus.OK);
+
     }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Question> getQuestion(@PathVariable  Integer id) {
+        try{
 
-
-    @GetMapping("/{id}")
-    public Optional<Question> getQuestion(@PathVariable  Integer id)
+            return  new ResponseEntity<>( QuestionService.findById(id).get(), HttpStatus.OK);}
+        	catch(java.util.NoSuchElementException e){
+            return  new ResponseEntity<>(new Question(), HttpStatus.NOT_FOUND);
+        }
+    }
+    @RequestMapping(value = "/qstinrub/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Question> getQuestionInRub(@PathVariable  Integer id)
     {
-        return QuestionService.findById(id);
+        return  new ResponseEntity<>( QuestionService.findQuestifExistinRub(id), HttpStatus.OK);
+
     }
 
-    @GetMapping("/qstinrub/{id}")
-    public Question getQuestionInRub(@PathVariable  Integer id)
+
+    @RequestMapping(value = "/findqstinEva/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Boolean> findQstinEva(@PathVariable Integer id)
     {
-        return QuestionService.findQuestifExistinRub(id);
-    }
+        return  new ResponseEntity<> ( QuestionService.FindQstinEva(id), HttpStatus.OK);
 
-    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
-    public String Existornoo(@PathVariable Integer id) {
-        return QuestionService.Existorno(id);
     }
-
     @PostMapping("/create")
-    Question CreateQuestion(@RequestBody Question newQuestion) {
-        return QuestionService.Create(newQuestion);
-    }
+    ResponseEntity<Question> CreateQuestion(@RequestBody Question newQuestion) {
 
+        return  new ResponseEntity<Question>(QuestionService.Create(newQuestion), HttpStatus.OK);
+    }
 
 
     @PostMapping(value = "/update")
-    public boolean updateQst(@RequestBody Question nvqst) {
+    public ResponseEntity<Boolean> updateQst(@RequestBody Question nvqst) {
+        return  new ResponseEntity<>( QuestionService.UpdateQuestion(nvqst), HttpStatus.OK);
 
-        return  QuestionService.UpdateQuestion(nvqst);
     }
+
 
     @DeleteMapping (value = "/supprimer/{id}")
 
-    public void supprimerQuestion(@PathVariable int id) {
+    public ResponseEntity<Boolean> supprimerQuestion(@PathVariable int id) {
+        return  new ResponseEntity<>( QuestionService.supprimer(id), HttpStatus.OK);
 
-        QuestionService.supprimer(id);
     }
     }

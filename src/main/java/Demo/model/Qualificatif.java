@@ -14,10 +14,10 @@ public class Qualificatif implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUA_SEQ",allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@SequenceGenerator(name = "SequenceIdGenerator2", sequenceName = "QUA_SEQ",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator2")
 	@Column(name="ID_QUALIFICATIF")
-	private long idQualificatif;
+	private Integer idQualificatif;
 
 	private String maximal;
 
@@ -27,15 +27,16 @@ public class Qualificatif implements Serializable {
 	}
 	public Qualificatif(String mina, String maxa) {
 		super();
+		//this.idQualificatif=idQualificatif;
 		this.minimal = mina;
 		this.maximal = maxa;
 	}
 
-	public long getIdQualificatif() {
+	public Integer getIdQualificatif() {
 		return this.idQualificatif;
 	}
 
-	public void setIdQualificatif(long idQualificatif) {
+	public void setIdQualificatif(Integer idQualificatif) {
 		this.idQualificatif = idQualificatif;
 	}
 

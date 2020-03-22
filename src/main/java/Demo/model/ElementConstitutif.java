@@ -1,5 +1,7 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,6 +36,7 @@ public class ElementConstitutif implements Serializable {
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
+	@JsonIgnore
 	private Enseignant enseignantt;
 
 	//uni-directional many-to-one association to UniteEnseignement
@@ -42,6 +45,7 @@ public class ElementConstitutif implements Serializable {
 		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false),
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
+	@JsonIgnore
 	private UniteEnseignement uniteEnseignementt;
 
 	public ElementConstitutif() {

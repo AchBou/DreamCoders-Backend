@@ -10,51 +10,61 @@ import Demo.model.Question;
 public class QuestionService {
 
     @Autowired
-    QuestionDAO QuestionDao;
-
+    private final QuestionDAO questionDao;
+    public QuestionService(QuestionDAO questionDao) {
+        this.questionDao = questionDao;
+    }
     public List<Question> getQuestions() {
 
-        return this.QuestionDao.findAll();
+        return this.questionDao.findAll();
     }
 
     public List<Question> getQuestionordre() {
 
-        return this.QuestionDao.ListerparOrdre();
+        return this.questionDao.ListerparOrdre();
     }
     public Question Create(Question Qst) {
-        return this.QuestionDao.save(Qst);
+        return this.questionDao.save(Qst);
     }
 
     public Optional<Question> findById(Integer id) {
 
-        return this.QuestionDao.findById(id);
+        return this.questionDao.findById(id);
     }
 
     public Question findQuestifExistinRub(Integer id) {
 
-        return this.QuestionDao.FindQstInRub(id);
+        return this.questionDao.FindQstInRub(id);
     }
     public boolean UpdateQuestion(Question qq) {
-        if (this.QuestionDao.findById(qq.getIdQuestion()).isPresent()) {
-            this.QuestionDao.save(qq);
+        if (this.questionDao.findById(qq.getIdQuestion()).isPresent()) {
+            this.questionDao.save(qq);
             return true ;
         }
         return false;
     }
     public String Existorno(Integer id){
-        if(this.QuestionDao.Existorno(id).equals(0)){
+        if(this.questionDao.Existorno(id).equals(0)){
             return "no Exist";
         }
         return "Exist";
     }
+    public boolean FindQstinEva(Integer id){
+        if(this.questionDao.FindQstInEval(id) == null){
+            return false;
+        }
+        return true;
+    }
 
     public void update(Question qst) {
-        QuestionDao.save(qst);
+        questionDao.save(qst);
     }
 
-    public void supprimer(Integer id) {
+    public Boolean supprimer(Integer id) {
 
-        this.QuestionDao.deleteById(id);
+        this.questionDao.deleteById(id);
+        return true;
     }
+
 
 }
