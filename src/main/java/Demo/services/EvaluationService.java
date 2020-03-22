@@ -31,17 +31,24 @@ public class EvaluationService {
 	 PromotionDAO promDao;
     @Autowired
     PromotionService promService;
+    @Autowired
+    EtatEvaluationDAO etatDAO;
 
      public List<Evaluation> getAllEvals()
      {
-         return this.evalDao.findAll();
+         List<Evaluation> ev = this.evalDao.findAll();
+         for (Evaluation evaluation:
+              ev) {
+             evaluation.setEtat(etatDAO.getOne(evaluation.getEtat()).getSignification());
+         }
+         return ev;
      }
  
      public Evaluation addUser(EvaluationPers eva) {
          //System.out.println(eva.toString());
-         Enseignant en = ensDao.getOne(1);
+         Enseignant en = ensDao.getOne(1); //Phillipe Saliou
          Evaluation evaluation = new Evaluation();
-         evaluation.setEnseignantt(en); //Phillipe Saliou
+         evaluation.setEnseignantt(en);
          evaluation.setDebutReponse(eva.getDebut_reponse());
          evaluation.setFinReponse(eva.getFin_reponse());
          evaluation.setDesignation(eva.getDesignation());
