@@ -1,20 +1,16 @@
 package Demo.services;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import Demo.DAO.*;
 import Demo.model.*;
 import Demo.modelPerso.EvaluationPers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
 import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response;
 
 
 @Service
@@ -34,9 +30,12 @@ public class EvaluationService {
     @Autowired
     EtatEvaluationDAO etatDAO;
 
+    private Sort orderBy(String property){
+        return Sort.by(Sort.Direction.DESC, property);
+    }
      public List<Evaluation> getAllEvals()
      {
-         List<Evaluation> ev = this.evalDao.findAll();
+         List<Evaluation> ev = this.evalDao.findAll(orderBy("debutReponse"));
          for (Evaluation evaluation:
               ev) {
              evaluation.setEtat(etatDAO.getOne(evaluation.getEtat()).getSignification());
