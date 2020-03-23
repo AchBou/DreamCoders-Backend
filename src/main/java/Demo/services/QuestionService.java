@@ -55,6 +55,13 @@ public class QuestionService {
         }
         return "Exist in eva";
     }
+    public String FindQsthasqualif(Integer id){
+        if(this.questionDao.FindQstHasQualif(id) == null){
+            return "no Exist in qualificatif";
+        }
+        return "Exist in qualificatif";
+    }
+
 
     public void update(Question qst) {
         questionDao.save(qst);

@@ -36,6 +36,12 @@ public class QuestionController {
 
     }
 
+   @RequestMapping(value = "/qstinqualif/{id}", method = RequestMethod.GET)
+   public ResponseEntity<String> getQuestionInq(@PathVariable  Integer id)
+   {
+       return  new ResponseEntity<>( QuestionService.FindQsthasqualif(id), HttpStatus.OK);
+
+   }
 
     @RequestMapping(value = "/findqstinEva/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> findQstinEva(@PathVariable Integer id)
