@@ -3,26 +3,26 @@ package Demo.controllers;
 import java.util.List;
 
 
-//import javax.ws.rs.core.MediaType;
 
 import Demo.modelPerso.EvaluationPers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotAllowedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 
 @RestController
 @RequestMapping("/eval")
-@CrossOrigin(origins="http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="http://localhost:4200")
 
 public class EvaluationController {
 
@@ -39,11 +39,19 @@ public class EvaluationController {
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Response addEval(@RequestBody EvaluationPers eva) {
-        Evaluation ev = this.evaService.addUser(eva);
-        if(ev==null){
-            return Response.status(Response.Status.BAD_REQUEST).build();
+        try {
+            Evaluation ev = this.evaService.addUser(eva);
+            return Response.ok(ev).build();
         }
-        return Response.ok(ev).build();
+        catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+        catch (BadRequestException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+        catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
     }
     
 

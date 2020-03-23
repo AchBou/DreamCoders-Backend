@@ -13,6 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Enseignant.findAll", query="SELECT e FROM Enseignant e")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Enseignant implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

@@ -1,6 +1,6 @@
 package Demo.controllers;
-
 import Demo.model.Qualificatif;
+import Demo.model.Question;
 import Demo.services.QualificatifService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import Exception.*;
-import java.util.Collection;
 
-@CrossOrigin(origins = "http://localhost:8080")
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/qualicatif")
 public class QualificatifController {
@@ -19,13 +20,13 @@ public class QualificatifController {
     @Autowired
     QualificatifService QualificatiSer;
 
-
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Qualificatif>> getAllQualif() {
-        Collection<Qualificatif> qls = QualificatiSer.findallqua();
-        logger.info("liste des utilisateurs : " + qls.toString());
-        return new ResponseEntity<Collection<Qualificatif>>(qls, HttpStatus.FOUND);
+    public ResponseEntity<List<Qualificatif>> getAllQualif()
+    {
+        return  new ResponseEntity<>(  QualificatiSer.findallqua(), HttpStatus.OK);
+
     }
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Qualificatif> getQuestion(@PathVariable  Integer id) {
@@ -55,7 +56,7 @@ public class QualificatifController {
     }
     @DeleteMapping (value = "/supprimer/{id}")
 
-    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) throws SprintException {
+    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) throws SprintException{
         if (QualificatiSer.FindQualifinQsts(id) != null ) {
             logger.debug("Qualificatif "+id+" Existe in Question ");
             throw new SprintException("Violation", "Suppression qualifcatif "+id+" Interdit Existe in Question ",HttpStatus.CONFLICT);

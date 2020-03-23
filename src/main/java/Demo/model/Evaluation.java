@@ -208,6 +208,7 @@ public class Evaluation implements Serializable {
 
 	public void setPromotionn(Promotion promotionn) {
 		this.promotionn = promotionn;
+		this.setAnne_Universitaire(promotionn.getId().getAnneeUniversitaire());
 	}
 
 	public UniteEnseignement getUniteEnseignementt() {

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/ue")
-@CrossOrigin
 public class UEController {
     @Autowired
     UEService ueService;

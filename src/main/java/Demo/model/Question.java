@@ -27,12 +27,12 @@ public class Question implements Serializable {
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT",referencedColumnName = "NO_ENSEIGNANT")
-	private Enseignant enseignantt;
+	private Enseignant enseignant;
 
 	//uni-directional many-to-one association to Qualificatif
 	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATIF",referencedColumnName = "ID_QUALIFICATIF")
-	private Qualificatif qualificatiff;
+	private Qualificatif qualificatif;
 
 	public Question() {
 	}
@@ -40,16 +40,16 @@ public class Question implements Serializable {
 				super();
 				this.intitule = intitule;
 				this.type = type;
-				this.enseignantt=enseignant;
-		this.qualificatiff= qualificatif;
+				this.enseignant =enseignant;
+		this.qualificatif = qualificatif;
 	}
 	public Question(int id,String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
 		super();
 		this.idQuestion = id;
 		this.intitule = intitule;
 		this.type = type;
-		this.enseignantt = enseignant;
-		this.qualificatiff = qualificatif;
+		this.enseignant = enseignant;
+		this.qualificatif = qualificatif;
 	}
 
 	public Integer getIdQuestion() {
@@ -76,20 +76,20 @@ public class Question implements Serializable {
 		this.type = type;
 	}
 
-	public Enseignant getEnseignantt() {
-		return this.enseignantt;
+	public Enseignant getEnseignant() {
+		return this.enseignant;
 	}
 
-	public void setEnseignantt(Enseignant enseignantt) {
-		this.enseignantt = enseignantt;
+	public void setEnseignant(Enseignant enseignantt) {
+		this.enseignant = enseignantt;
 	}
 
-	public Qualificatif getQualificatiff() {
-		return this.qualificatiff;
+	public Qualificatif getQualificatif() {
+		return this.qualificatif;
 	}
 
-	public void setQualificatiff(Qualificatif qualificatiff) {
-		this.qualificatiff = qualificatiff;
+	public void setQualificatif(Qualificatif qualificatiff) {
+		this.qualificatif = qualificatiff;
 	}
 
 }
