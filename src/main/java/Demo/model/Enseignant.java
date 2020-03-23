@@ -50,8 +50,8 @@ public class Enseignant implements Serializable {
 
 	private String ville;
 
-	@OneToMany(mappedBy = "enseignantt")
-	@JsonIgnoreProperties(value = "enseignantt")
+	@OneToMany(mappedBy = "enseignant")
+	@JsonIgnoreProperties(value = "enseignant")
 	private List<Evaluation> evaluations;
 
 	public Enseignant() {

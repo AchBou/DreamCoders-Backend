@@ -47,7 +47,7 @@ public class EvaluationService {
          //System.out.println(eva.toString());
          Enseignant en = ensDao.getOne(1); //Phillipe Saliou
          Evaluation evaluation = new Evaluation();
-         evaluation.setEnseignantt(en);
+         evaluation.setEnseignant(en);
          evaluation.setDebutReponse(eva.getDebut_reponse());
          evaluation.setFinReponse(eva.getFin_reponse());
          evaluation.setDesignation(eva.getDesignation());
@@ -59,7 +59,7 @@ public class EvaluationService {
          evaluation.setCode_ec(eva.getCode_ec());
          Promotion p = this.promService.getCurrentPromo(eva.getCode_formation());
          if(p!=null){
-             evaluation.setPromotionn(p);
+             evaluation.setPromotion(p);
          }
          else{
              throw new NotFoundException("Aucune promotion actuelle de la formation que vous avez choisie");
