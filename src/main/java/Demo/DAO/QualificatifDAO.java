@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QualificatifDAO extends JpaRepository<Qualificatif, Integer> {
     @Query("SELECT Q from Qualificatif  Q, Question  d WHERE " +
-            "Q.idQualificatif = :idQualificatif AND  Q.idQualificatif  = d.qualificatiff.idQualificatif ")
+            "Q.idQualificatif = :idQualificatif AND  Q.idQualificatif  = d.qualificatif.idQualificatif ")
     public Qualificatif FindquaInQsts(Integer idQualificatif);
 }

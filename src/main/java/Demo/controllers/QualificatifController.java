@@ -1,6 +1,8 @@
 package Demo.controllers;
+import Demo.model.Evaluation;
 import Demo.model.Qualificatif;
 import Demo.model.Question;
+import Demo.modelPerso.EvaluationPers;
 import Demo.services.QualificatifService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import Exception.*;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,10 +50,23 @@ public class QualificatifController {
     }
 
     @PostMapping("/create")
-    ResponseEntity<Qualificatif> CreateQualificatif(@RequestBody Qualificatif newQualificatif) {
+    public Response CreateQualificatif(@RequestBody Qualificatif newQualificatif) {
+        try {
+            Qualificatif qualif = this.QualificatiSer.Create(newQualificatif);
+            return Response.ok(qualif).build();
+        }
+        catch (NotFoundException e){
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+        catch (BadRequestException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+        catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
 
-        return  new ResponseEntity<Qualificatif>(QualificatiSer.Create(newQualificatif), HttpStatus.OK);
     }
+
     @PostMapping(value = "/update")
     public ResponseEntity<Boolean> updateQual(@RequestBody Qualificatif qualmd) {
         return  new ResponseEntity<>( QualificatiSer.UpdateQual(qualmd), HttpStatus.OK);

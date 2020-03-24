@@ -21,7 +21,7 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
     public Question FindQstInRub(Integer idQuestion);
 
     @Query("SELECT d from Question  d, Qualificatif q WHERE " +
-            "d.idQuestion = :idQuestion AND d.qualificatiff.idQualificatif = q.idQualificatif")
+            "d.idQuestion = :idQuestion AND d.qualificatif.idQualificatif = q.idQualificatif")
     public Question FindQstHasQualif(Integer idQuestion);
 
     @Query("SELECT d from Question d,QuestionEvaluation qe WHERE" +
