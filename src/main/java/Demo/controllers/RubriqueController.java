@@ -35,17 +35,23 @@ public class RubriqueController {
 
             return  new ResponseEntity<>(  RubService.getAllRubriques(), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>(new ArrayList<Rubrique>(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>(new ArrayList<Rubrique>(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(new ArrayList<Rubrique>(), HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Message d'erreur:", String.valueOf(e));
+            headers.set("Message d'erreur:", e.getMessage());
             return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
         }
 
@@ -56,18 +62,24 @@ public class RubriqueController {
 
         return  new ResponseEntity<>( RubService.FindRubrique(id).get(), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
-        return  new ResponseEntity<>( new Rubrique(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>( new Rubrique(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(new Rubrique(), HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
-                HttpHeaders headers = new HttpHeaders();
-                headers.add("Message d'erreur:", String.valueOf(e));
-                return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -77,17 +89,23 @@ public class RubriqueController {
 
             return  new ResponseEntity<>( RubService.TestRubLink(id), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Message d'erreur:", String.valueOf(e));
+            headers.set("message", e.getMessage());
             return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
     }
@@ -97,17 +115,23 @@ public class RubriqueController {
 
             return  new ResponseEntity<>( RubService.CreateRubrique(newRubrique), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>( new Rubrique(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>( new Rubrique(), HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(new Rubrique(), HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Message d'erreur:", String.valueOf(e));
+            headers.set("message", e.getMessage());
             return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
         }
 
@@ -119,17 +143,23 @@ public class RubriqueController {
 
             return  new ResponseEntity<>( RubService.UpdateRubrique(newRubrique), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Message d'erreur:", String.valueOf(e));
+            headers.set("message", e.getMessage());
             return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
 
@@ -142,17 +172,23 @@ public class RubriqueController {
             return  new ResponseEntity<>( RubService.Delete(id), HttpStatus.OK);
         }
         catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (NotFoundException e){
-            return  new ResponseEntity<>( false, HttpStatus.NOT_FOUND);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (BadRequestException e){
-            return  new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
         catch (Exception e){
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Message d'erreur:", String.valueOf(e));
+            headers.set("message",e.getMessage());
             return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
         }
     }

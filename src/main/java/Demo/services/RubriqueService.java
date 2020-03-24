@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import Demo.model.Rubrique;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+
 @Service
 public class RubriqueService {
     @Autowired
@@ -27,7 +30,7 @@ public class RubriqueService {
                  this.userDao.save(Rub);
                 return true ;
             }
-            return false;
+        throw new NotFoundException("Cettre Rubrique n'exist pas");
         }
 
     public Optional<Rubrique> FindRubrique(Integer id){
@@ -35,8 +38,10 @@ public class RubriqueService {
 
             return this.userDao.findById(id);
 
-    }
-        return Optional.empty();
+
+        }
+        throw new NotFoundException("Cettre Rubrique n'exist pas");
+
     }
     public Rubrique CreateRubrique(Rubrique Rub) {
 
@@ -47,13 +52,18 @@ public class RubriqueService {
             this.userDao.deleteById(id);
             return true ;
         }
-        return false;
+        throw new NotFoundException("Cettre Rubrique n'exist pas");
+
+
     }
     public boolean TestRubLink(Integer id){
         if(this.userDao.TestRub(id).equals(0)){
             return false;
+
         }
-        return true;
+        throw new BadRequestException("Cette Rubrique est deja utilisée");
+
+
     }
 
 
