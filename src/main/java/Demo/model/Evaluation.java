@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -68,14 +69,13 @@ public class Evaluation implements Serializable {
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
     @JsonIgnoreProperties(value = { "evaluations" })
-
-    private ElementConstitutif elementConstitutiff;
+    private ElementConstitutif elementConstitutif;
 
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Enseignant enseignantt;
+	private Enseignant enseignant;
 
 	//uni-directional many-to-one association to Promotion
 	@ManyToOne
@@ -83,7 +83,7 @@ public class Evaluation implements Serializable {
 		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE", insertable=false, updatable=false),
 		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION", insertable=false, updatable=false)
 		})
-	private Promotion promotionn;
+	private Promotion promotion;
 
 	//bi-directional many-to-one association to UniteEnseignement
 	@ManyToOne
@@ -92,8 +92,11 @@ public class Evaluation implements Serializable {
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE", insertable=false, updatable=false)
 		})
     @JsonIgnoreProperties(value = { "evaluations" })
+    private UniteEnseignement uniteEnseignement;
 
-    private UniteEnseignement uniteEnseignementt;
+	@OneToMany(mappedBy = "evaluation")
+	@JsonIgnoreProperties(value = "evaluation")
+	private List<RubriqueEvaluation> rubriqueEvaluations;
 
 	public Evaluation() {
 	}
@@ -186,37 +189,43 @@ public class Evaluation implements Serializable {
 		this.code_formation = code_formation;
 	}
 
-	public ElementConstitutif getElementConstitutiff() {
-		return this.elementConstitutiff;
+	public ElementConstitutif getElementConstitutif() {
+		return this.elementConstitutif;
 	}
 
-	public void setElementConstitutiff(ElementConstitutif elementConstitutiff) {
-		this.elementConstitutiff = elementConstitutiff;
+	public void setElementConstitutif(ElementConstitutif elementConstitutiff) {
+		this.elementConstitutif = elementConstitutiff;
 	}
 
-	public Enseignant getEnseignantt() {
-		return this.enseignantt;
+	public Enseignant getEnseignant() {
+		return this.enseignant;
 	}
 
-	public void setEnseignantt(Enseignant enseignantt) {
-		this.enseignantt = enseignantt;
+	public void setEnseignant(Enseignant enseignantt) {
+		this.enseignant = enseignantt;
 	}
 
-	public Promotion getPromotionn() {
-		return this.promotionn;
+	public Promotion getPromotion() {
+		return this.promotion;
 	}
 
-	public void setPromotionn(Promotion promotionn) {
-		this.promotionn = promotionn;
+	public void setPromotion(Promotion promotionn) {
+		this.promotion = promotionn;
 		this.setAnne_Universitaire(promotionn.getId().getAnneeUniversitaire());
 	}
 
-	public UniteEnseignement getUniteEnseignementt() {
-		return this.uniteEnseignementt;
+	public UniteEnseignement getUniteEnseignement() {
+		return this.uniteEnseignement;
 	}
 
-	public void setUniteEnseignementt(UniteEnseignement uniteEnseignementt) {
-		this.uniteEnseignementt = uniteEnseignementt;
+	public void setUniteEnseignement(UniteEnseignement uniteEnseignementt) {
+		this.uniteEnseignement = uniteEnseignementt;
 	}
 
+	public List<RubriqueEvaluation> getRubriqueEvaluations() {
+		return rubriqueEvaluations;
+	}
+	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
+		this.rubriqueEvaluations = rubriqueEvaluations;
+	}
 }

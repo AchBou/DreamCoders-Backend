@@ -26,7 +26,7 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
 
     @Query("SELECT d from Question d,QuestionEvaluation qe WHERE" +
             " d.idQuestion = :idQuestion AND " +
-            " d.idQuestion = qe.questionn.idQuestion")
+            " d.idQuestion = qe.question.idQuestion")
     public Question FindQstInEval(Integer idQuestion);
     @Transactional
     @Modifying(clearAutomatically = true)
