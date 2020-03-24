@@ -31,11 +31,11 @@ public class QualificatifService {
         return this.qualificatifDAO.save(Qual);
     }
 
-    public String FindQualifinQsts(Integer id){
+    public boolean FindQualifinQsts(Integer id){
         if(this.qualificatifDAO.FindquaInQsts(id) == null){
-            return "no Exist in question";
+            return false;
         }
-        return "Exist in question";
+        return true;
     }
 
 
