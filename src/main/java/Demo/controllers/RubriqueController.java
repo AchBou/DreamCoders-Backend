@@ -37,12 +37,12 @@ public class RubriqueController {
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("Message d'erreur:", e.getMessage());
-            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("Message d'erreur:", e.getMessage());
-            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ArrayList<Rubrique>(),headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
             HttpHeaders headers = new HttpHeaders();
@@ -64,12 +64,12 @@ public class RubriqueController {
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("Message d'erreur:", e.getMessage());
-            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("Message d'erreur:", e.getMessage());
-            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
             HttpHeaders headers = new HttpHeaders();
@@ -117,12 +117,12 @@ public class RubriqueController {
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Rubrique(),headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
             HttpHeaders headers = new HttpHeaders();
@@ -145,12 +145,12 @@ public class RubriqueController {
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
             HttpHeaders headers = new HttpHeaders();
@@ -174,12 +174,12 @@ public class RubriqueController {
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (NotFoundException e){
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());
-            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
         }
         catch (BadRequestException e){
             HttpHeaders headers = new HttpHeaders();
