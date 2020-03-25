@@ -1,8 +1,11 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -27,12 +30,16 @@ public class RubriqueEvaluation implements Serializable {
 	//uni-directional many-to-one association to Evaluation
 	@ManyToOne
 	@JoinColumn(name="ID_EVALUATION", insertable=false, updatable=false)
-	private Evaluation evaluationn;
+	private Evaluation evaluation;
 
 	//uni-directional many-to-one association to Rubrique
 	@ManyToOne
 	@JoinColumn(name="ID_RUBRIQUE", insertable=false, updatable=false)
-	private Rubrique rubriquee;
+	private Rubrique rubrique;
+
+	@OneToMany(mappedBy = "rubriqueEvaluation")
+	@JsonIgnoreProperties(value = "rubriqueEvaluation")
+	private List<QuestionEvaluation> questionEvaluations;
 
 	public RubriqueEvaluation() {
 	}
@@ -61,20 +68,26 @@ public class RubriqueEvaluation implements Serializable {
 		this.ordre = ordre;
 	}
 
-	public Evaluation getEvaluationn() {
-		return this.evaluationn;
+	public Evaluation getEvaluation() {
+		return this.evaluation;
 	}
 
-	public void setEvaluationn(Evaluation evaluationn) {
-		this.evaluationn = evaluationn;
+	public void setEvaluation(Evaluation evaluationn) {
+		this.evaluation = evaluationn;
 	}
 
-	public Rubrique getRubriquee() {
-		return this.rubriquee;
+	public Rubrique getRubrique() {
+		return this.rubrique;
 	}
 
-	public void setRubriquee(Rubrique rubriquee) {
-		this.rubriquee = rubriquee;
+	public void setRubrique(Rubrique rubriquee) {
+		this.rubrique = rubriquee;
 	}
 
+	public List<QuestionEvaluation> getQuestionEvaluations() {
+		return questionEvaluations;
+	}
+	public void setQuestionEvaluations(List<QuestionEvaluation> questionEvaluations) {
+		this.questionEvaluations = questionEvaluations;
+	}
 }

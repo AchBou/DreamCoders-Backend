@@ -14,13 +14,19 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
             + "FROM Question d INNER JOIN d.qualificatif e ORDER BY  e.minimal ASC ")
     public List<Question> ListerparOrdre();
 
+
     @Query("SELECT d from Question d,RubriqueQuestion r WHERE" +
             " d.idQuestion = :idQuestion AND " +
             " d.idQuestion = r.questionn.idQuestion")
     public Question FindQstInRub(Integer idQuestion);
+
+    @Query("SELECT d from Question  d, Qualificatif q WHERE " +
+            "d.idQuestion = :idQuestion AND d.qualificatif.idQualificatif = q.idQualificatif")
+    public Question FindQstHasQualif(Integer idQuestion);
+
     @Query("SELECT d from Question d,QuestionEvaluation qe WHERE" +
             " d.idQuestion = :idQuestion AND " +
-            " d.idQuestion = qe.questionn.idQuestion")
+            " d.idQuestion = qe.question.idQuestion")
     public Question FindQstInEval(Integer idQuestion);
     @Transactional
     @Modifying(clearAutomatically = true)

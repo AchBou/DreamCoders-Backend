@@ -32,9 +32,12 @@ public class QuestionService {
         return this.questionDao.findById(id);
     }
 
-    public Question findQuestifExistinRub(Integer id) {
+    public boolean findQuestifExistinRub(Integer id) {
+        if(this.questionDao.FindQstInRub(id) == null){
+            return false;
+        }
+        return true;
 
-        return this.questionDao.FindQstInRub(id);
     }
     public boolean UpdateQuestion(Question qq) {
         if (this.questionDao.findById(qq.getIdQuestion()).isPresent()) {
@@ -55,6 +58,13 @@ public class QuestionService {
         }
         return true;
     }
+    public boolean FindQsthasqualif(Integer id){
+        if(this.questionDao.FindQstHasQualif(id) == null){
+            return false;
+        }
+        return true;
+    }
+
 
     public void update(Question qst) {
         questionDao.save(qst);
