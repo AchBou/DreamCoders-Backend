@@ -90,7 +90,6 @@ public class EvaluationService {
              throw ex;
          }
          return evaluation;
->>>>>>> remotes/origin/master
      }
     //update Evaluation
     public boolean UpdateEvaluation(Evaluation eva) {

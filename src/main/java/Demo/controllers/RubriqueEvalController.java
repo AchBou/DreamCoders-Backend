@@ -14,6 +14,7 @@ public class RubriqueEvalController {
     @Autowired
     RubriqueEvalService rubriqueEvalService;
 
+    //listee ***********
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public List<RubriqueEvaluation> getRubriqueByEval(@PathVariable long id) {
         return rubriqueEvalService.findRubriqueByEval(id);

@@ -13,12 +13,12 @@ public class RubriqueEvalService {
     @Autowired
     RubriqueEvalDAO rubriqueEvalDAO;
 
-    //lister les rubriques d'une evaluation
+    //lister les rubriques d'une evaluation****
     public List<RubriqueEvaluation> findRubriqueByEval(long idEvaluation){
       return rubriqueEvalDAO.findRubriqueByEval(idEvaluation);
     }
 
-    //Supprimer une rubrique
+    //Supprimer une rubrique*****
     public boolean deleteRubrique(long idRubrique) {
         if (this.rubriqueEvalDAO.findById(idRubrique).isPresent()) {
             this.rubriqueEvalDAO.deleteById(idRubrique);
@@ -26,7 +26,7 @@ public class RubriqueEvalService {
         }
         return false;
     }
-    //affecter rubrique evaluation
+    //affecter rubrique evaluation***
 
     public RubriqueEvaluation createRubEval(RubriqueEvaluation rq){
         return rubriqueEvalDAO.save(rq);
