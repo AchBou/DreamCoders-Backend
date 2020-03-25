@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RubriqueEvalDAO extends JpaRepository<RubriqueEvaluation, Long> {
     //liste rubrique par evaluation
-    @Query(value = "select r from RubriqueEvaluation r where r.evaluationn.idEvaluation = ?1")
+    @Query(value = "select r from RubriqueEvaluation r where r.evaluationn.idEvaluation = ?1 order by r.rubriquee.designation asc")
     public List<RubriqueEvaluation> findRubriqueByEval(long idEvaluation);
 
 
