@@ -165,7 +165,7 @@ public class QualificatifController {
     }
     @DeleteMapping (value = "/supprimer/{id}")
 
-    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) throws SprintException {
+    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) {
 
         try {
 
