@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import Exception.*;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
@@ -165,7 +164,7 @@ public class QualificatifController {
     }
     @DeleteMapping (value = "/supprimer/{id}")
 
-    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) throws SprintException {
+    public ResponseEntity<Boolean> supprimerQuali(@PathVariable int id) {
 
         try {
 
