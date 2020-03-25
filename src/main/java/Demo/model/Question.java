@@ -15,8 +15,8 @@ public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "QUE_SEQ",allocationSize=1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator1")
+	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "QUE_SEQ",allocationSize=1)
 	@Column(name="ID_QUESTION", insertable=false, updatable=false)
 	private Integer idQuestion;
 
@@ -26,30 +26,30 @@ public class Question implements Serializable {
 	private String type;
 	//uni-directional many-to-one association to Enseignant
 	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT", insertable=false, updatable=false)
-	private Enseignant enseignantt;
+	@JoinColumn(name="NO_ENSEIGNANT",referencedColumnName = "NO_ENSEIGNANT")
+	private Enseignant enseignant;
 
 	//uni-directional many-to-one association to Qualificatif
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATIF",referencedColumnName = "ID_QUALIFICATIF")
-	private Qualificatif qualificatiff;
+	private Qualificatif qualificatif;
 
 	public Question() {
 	}
-	public Question(String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
-		super();
-		this.intitule = intitule;
-		this.type = type;
-		this.enseignantt = enseignant;
-		this.qualificatiff= qualificatif;
+			public Question(String intitule, String type, Enseignant enseignant,Qualificatif qualificatif) {
+				super();
+				this.intitule = intitule;
+				this.type = type;
+				this.enseignant =enseignant;
+		this.qualificatif = qualificatif;
 	}
 	public Question(int id,String intitule, String type, Enseignant enseignant, Qualificatif qualificatif) {
 		super();
 		this.idQuestion = id;
 		this.intitule = intitule;
 		this.type = type;
-		this.enseignantt = enseignant;
-		this.qualificatiff = qualificatif;
+		this.enseignant = enseignant;
+		this.qualificatif = qualificatif;
 	}
 
 	public Integer getIdQuestion() {
@@ -76,20 +76,20 @@ public class Question implements Serializable {
 		this.type = type;
 	}
 
-	public Enseignant getEnseignantt() {
-		return this.enseignantt;
+	public Enseignant getEnseignant() {
+		return this.enseignant;
 	}
 
-	public void setEnseignantt(Enseignant enseignantt) {
-		this.enseignantt = enseignantt;
+	public void setEnseignant(Enseignant enseignantt) {
+		this.enseignant = enseignantt;
 	}
 
-	public Qualificatif getQualificatiff() {
-		return this.qualificatiff;
+	public Qualificatif getQualificatif() {
+		return this.qualificatif;
 	}
 
-	public void setQualificatiff(Qualificatif qualificatiff) {
-		this.qualificatiff = qualificatiff;
+	public void setQualificatif(Qualificatif qualificatiff) {
+		this.qualificatif = qualificatiff;
 	}
 
 }

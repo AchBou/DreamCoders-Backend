@@ -11,18 +11,27 @@ import java.util.List;
 @Repository
 public interface QuestionDAO  extends JpaRepository<Question , Integer> {
     @Query( "SELECT d "
-            + "FROM Question d INNER JOIN d.qualificatiff e ORDER BY  e.minimal ASC ")
+            + "FROM Question d INNER JOIN d.qualificatif e ORDER BY  e.minimal ASC ")
     public List<Question> ListerparOrdre();
+
 
     @Query("SELECT d from Question d,RubriqueQuestion r WHERE" +
             " d.idQuestion = :idQuestion AND " +
             " d.idQuestion = r.questionn.idQuestion")
     public Question FindQstInRub(Integer idQuestion);
 
+    @Query("SELECT d from Question  d, Qualificatif q WHERE " +
+            "d.idQuestion = :idQuestion AND d.qualificatif.idQualificatif = q.idQualificatif")
+    public Question FindQstHasQualif(Integer idQuestion);
+
+    @Query("SELECT d from Question d,QuestionEvaluation qe WHERE" +
+            " d.idQuestion = :idQuestion AND " +
+            " d.idQuestion = qe.question.idQuestion")
+    public Question FindQstInEval(Integer idQuestion);
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE Question c SET c.enseignantt.prenom = :enseignantt ," +
-            "c.type = :type,c.intitule=:intitule,c.qualificatiff.minimal=:minimal,c.qualificatiff.maximal=:maximal " +
+    @Query("UPDATE Question c SET c.enseignant.prenom = :enseignantt ," +
+            "c.type = :type,c.intitule=:intitule,c.qualificatif.minimal=:minimal,c.qualificatif.maximal=:maximal " +
             "WHERE c.idQuestion  = :QuestionId")
     Question updateQuestion(@Param("QuestionId") int QuestionId, @Param("enseignantt") String enseignantt,
                             @Param("type") String type ,@Param("intitule") String intitule ,

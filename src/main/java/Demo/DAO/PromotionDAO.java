@@ -12,4 +12,7 @@ import java.util.List;
 public interface PromotionDAO extends JpaRepository<Promotion, PromotionPK> {
     @Query("select p from Promotion p where p.id.codeFormation = ?1")
     List<Promotion> findByCodeFormation(String codeFormation);
+
+    @Query("select p from Promotion p where p.id.anneeUniversitaire = ?1 and p.id.codeFormation = ?2")
+    Promotion getCurrent(String anneUniversitaire, String codeFormation );
 }

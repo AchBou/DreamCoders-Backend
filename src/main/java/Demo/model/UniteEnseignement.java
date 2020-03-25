@@ -1,6 +1,8 @@
 package Demo.model;
 
-import net.minidev.json.annotate.JsonIgnore;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -37,8 +39,7 @@ public class UniteEnseignement implements Serializable {
 	private String semestre;
 
 	//bi-directional many-to-one association to Evaluation
-	@OneToMany(mappedBy="uniteEnseignementt")
-	@JsonIgnore
+	@OneToMany(mappedBy= "uniteEnseignement")
 	private List<Evaluation> evaluations;
 
 	//uni-directional many-to-one association to Enseignant
@@ -110,6 +111,8 @@ public class UniteEnseignement implements Serializable {
 		this.semestre = semestre;
 	}
 
+
+	@JsonIgnore
 	public List<Evaluation> getEvaluations() {
 		return this.evaluations;
 	}
@@ -120,18 +123,20 @@ public class UniteEnseignement implements Serializable {
 
 	public Evaluation addEvaluation(Evaluation evaluation) {
 		getEvaluations().add(evaluation);
-		evaluation.setUniteEnseignementt(this);
+		evaluation.setUniteEnseignement(this);
 
 		return evaluation;
 	}
 
 	public Evaluation removeEvaluation(Evaluation evaluation) {
 		getEvaluations().remove(evaluation);
-		evaluation.setUniteEnseignementt(null);
+		evaluation.setUniteEnseignement(null);
 
 		return evaluation;
 	}
 
+
+	@JsonIgnore
 	public Enseignant getEnseignantt() {
 		return this.enseignantt;
 	}
@@ -140,6 +145,7 @@ public class UniteEnseignement implements Serializable {
 		this.enseignantt = enseignantt;
 	}
 
+	@JsonIgnore
 	public Formation getFormationn() {
 		return this.formationn;
 	}

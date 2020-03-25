@@ -1,11 +1,16 @@
 package Demo.DAO;
 
 import Demo.model.Evaluation;
+import Demo.modelPerso.EvaluationPers;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
 
 
 @Repository
-public interface EvaluationDAO extends JpaRepository<Evaluation, Long>{
-
+public interface EvaluationDAO extends JpaRepository<Evaluation, Integer>{
 }

@@ -27,17 +27,17 @@ public class QuestionEvaluation implements Serializable {
 	//uni-directional many-to-one association to Qualificatif
 	@ManyToOne
 	@JoinColumn(name="ID_QUALIFICATIF", insertable=false, updatable=false)
-	private Qualificatif qualificatiff;
+	private Qualificatif qualificatif;
 
 	//uni-directional many-to-one association to Question
 	@ManyToOne
 	@JoinColumn(name="ID_QUESTION", insertable=false, updatable=false)
-	private Question questionn;
+	private Question question;
 
 	//uni-directional many-to-one association to RubriqueEvaluation
 	@ManyToOne
 	@JoinColumn(name="ID_RUBRIQUE_EVALUATION", insertable=false, updatable=false)
-	private RubriqueEvaluation rubriqueEvaluationn;
+	private RubriqueEvaluation rubriqueEvaluation;
 
 	public QuestionEvaluation() {
 	}
@@ -66,28 +66,28 @@ public class QuestionEvaluation implements Serializable {
 		this.ordre = ordre;
 	}
 
-	public Qualificatif getQualificatiff() {
-		return this.qualificatiff;
+	public Qualificatif getQualificatif() {
+		return this.qualificatif;
 	}
 
-	public void setQualificatiff(Qualificatif qualificatiff) {
-		this.qualificatiff = qualificatiff;
+	public void setQualificatif(Qualificatif qualificatiff) {
+		this.qualificatif = qualificatiff;
 	}
 
-	public Question getQuestionn() {
-		return this.questionn;
+	public Question getQuestion() {
+		return this.question;
 	}
 
-	public void setQuestionn(Question questionn) {
-		this.questionn = questionn;
+	public void setQuestion(Question questionn) {
+		this.question = questionn;
 	}
 
-	public RubriqueEvaluation getRubriqueEvaluationn() {
-		return this.rubriqueEvaluationn;
+	public RubriqueEvaluation getRubriqueEvaluation() {
+		return this.rubriqueEvaluation;
 	}
 
-	public void setRubriqueEvaluationn(RubriqueEvaluation rubriqueEvaluationn) {
-		this.rubriqueEvaluationn = rubriqueEvaluationn;
+	public void setRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluationn) {
+		this.rubriqueEvaluation = rubriqueEvaluationn;
 	}
 
 }

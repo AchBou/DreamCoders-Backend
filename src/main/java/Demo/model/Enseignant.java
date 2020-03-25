@@ -1,6 +1,9 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -10,13 +13,14 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Enseignant.findAll", query="SELECT e FROM Enseignant e")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Enseignant implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name = "SequenceIdGenerator", sequenceName = "ENS_SEQ",allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SequenceIdGenerator")
 	@Column(name="NO_ENSEIGNANT")
-	private long noEnseignant;
+	private Integer noEnseignant;
 
 	private String adresse;
 
@@ -46,19 +50,19 @@ public class Enseignant implements Serializable {
 
 	private String ville;
 
+	@OneToMany(mappedBy = "enseignant")
+	@JsonIgnoreProperties(value = "enseignant")
+	private List<Evaluation> evaluations;
+
 	public Enseignant() {
 	}
-	public Enseignant(String prenom, String nom) {
-		super();
-		this.prenom = prenom;
-		this.nom = nom;
-	}
 
-	public long getNoEnseignant() {
+
+	public Integer getNoEnseignant() {
 		return this.noEnseignant;
 	}
 
-	public void setNoEnseignant(long noEnseignant) {
+	public void setNoEnseignant(Integer noEnseignant) {
 		this.noEnseignant = noEnseignant;
 	}
 
