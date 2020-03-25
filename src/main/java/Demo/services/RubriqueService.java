@@ -1,5 +1,6 @@
 package Demo.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,12 @@ public class RubriqueService {
     }
     public boolean UpdateRubrique(Rubrique Rub) {
             if (this.userDao.findById(Rub.getIdRubrique()).isPresent()) {
+
+                Rub.setOrdre(BigDecimal.valueOf(0));
                  this.userDao.save(Rub);
                 return true ;
             }
-        throw new NotFoundException("Cettre Rubrique n'exist pas");
+        throw new NotFoundException("Cettre Rubrique n'éxist pas");
         }
 
     public Optional<Rubrique> FindRubrique(Integer id){
@@ -40,11 +43,11 @@ public class RubriqueService {
 
 
         }
-        throw new NotFoundException("Cettre Rubrique n'exist pas");
+        throw new NotFoundException("Cettre Rubrique n'éxist pas");
 
     }
     public Rubrique CreateRubrique(Rubrique Rub) {
-
+        Rub.setOrdre(BigDecimal.valueOf(0));
            return this.userDao.save(Rub);
     }
     public boolean Delete(Integer id) {
@@ -52,7 +55,7 @@ public class RubriqueService {
             this.userDao.deleteById(id);
             return true ;
         }
-        throw new NotFoundException("Cettre Rubrique n'exist pas");
+        throw new NotFoundException("Cette Rubrique n'éxist pas");
 
 
     }
@@ -61,7 +64,7 @@ public class RubriqueService {
             return false;
 
         }
-        throw new BadRequestException("Cette Rubrique est deja utilisée");
+        throw new BadRequestException("Cette Rubrique est déja utilisée");
 
 
     }
