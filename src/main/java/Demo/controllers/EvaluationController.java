@@ -5,15 +5,15 @@ import java.util.List;
 
 //import javax.ws.rs.core.MediaType;
 
+import Demo.model.RubriqueEvaluation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
@@ -40,6 +40,13 @@ public class EvaluationController {
     public EvaluationService addNewUser(@RequestBody Evaluation eva) {
         return this.evaService.addUser(eva);
     } */
+    //change etat d'evaluation
+    @PostMapping(value = "/update")
+    public ResponseEntity<Boolean> UpdateRubrique(@RequestBody Evaluation eva) {
+        return  new ResponseEntity<>(evaService.UpdateEvaluation(eva), HttpStatus.OK);
+
+
+    }
     
 
 
