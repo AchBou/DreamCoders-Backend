@@ -9,11 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
@@ -32,6 +29,12 @@ public class EvaluationController {
     @JsonIgnoreProperties(value = { "evaluations" })
     public List<Evaluation> getAllUsers() {
         return evaService.getAllEvals();
+    }
+
+    @PostMapping(value = "/update")
+    public boolean updateQst(@RequestBody Evaluation evaluation) {
+
+        return  evaService.UpdateEvaluation(evaluation);
     }
 
     /* @RequestMapping(value = "/adduser", method = RequestMethod.POST,
