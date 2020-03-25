@@ -39,6 +39,7 @@ public class RubriqueEvaluation implements Serializable {
 
 	@OneToMany(mappedBy = "rubriqueEvaluation")
 	@JsonIgnoreProperties(value = "rubriqueEvaluation")
+	@OrderBy(value = "idQuestionEvaluation")
 	private List<QuestionEvaluation> questionEvaluations;
 
 	public RubriqueEvaluation() {
