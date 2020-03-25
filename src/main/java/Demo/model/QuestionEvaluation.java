@@ -16,8 +16,9 @@ public class QuestionEvaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_QUESTION_EVALUATION", insertable=false, updatable=false)
+	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "QEV_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator1")
+	@Column(name="ID_QUESTION_EVALUATION")
 	private long idQuestionEvaluation;
 
 	private String intitule;
@@ -26,18 +27,21 @@ public class QuestionEvaluation implements Serializable {
 
 	//uni-directional many-to-one association to Qualificatif
 	@ManyToOne
-	@JoinColumn(name="ID_QUALIFICATIF", insertable=false, updatable=false)
+	@JoinColumn(name="ID_QUALIFICATIF")
 	private Qualificatif qualificatif;
 
 	//uni-directional many-to-one association to Question
 	@ManyToOne
-	@JoinColumn(name="ID_QUESTION", insertable=false, updatable=false)
+	@JoinColumn(name="ID_QUESTION")
 	private Question question;
 
 	//uni-directional many-to-one association to RubriqueEvaluation
 	@ManyToOne
 	@JoinColumn(name="ID_RUBRIQUE_EVALUATION", insertable=false, updatable=false)
 	private RubriqueEvaluation rubriqueEvaluation;
+
+	@Column(name="ID_RUBRIQUE_EVALUATION")
+	private long idRubriqueEvaluation;
 
 	public QuestionEvaluation() {
 	}
@@ -90,4 +94,11 @@ public class QuestionEvaluation implements Serializable {
 		this.rubriqueEvaluation = rubriqueEvaluationn;
 	}
 
+	public long getIdRubriqueEvaluation() {
+		return idRubriqueEvaluation;
+	}
+
+	public void setIdRubriqueEvaluation(long idRubriqueEvaluation) {
+		this.idRubriqueEvaluation = idRubriqueEvaluation;
+	}
 }
