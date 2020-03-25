@@ -12,5 +12,5 @@ import javax.transaction.Transactional;
 
 
 @Repository
-public interface EvaluationDAO extends JpaRepository<Evaluation, Integer>{
+public interface EvaluationDAO extends JpaRepository<Evaluation, Long>{
 }

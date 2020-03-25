@@ -2,6 +2,9 @@ package Demo.services;
 
 import java.util.List;
 
+import Demo.DAO.EvaluationDAO;
+//import Demo.modelPerso.ListeEvalForm;
+import Demo.model.Question;
 import Demo.DAO.*;
 import Demo.model.*;
 import Demo.modelPerso.EvaluationPers;
@@ -16,26 +19,32 @@ import javax.ws.rs.NotFoundException;
 @Service
 public class EvaluationService {
 	 @Autowired
-     EvaluationDAO evalDao;
+
+     EvaluationDAO evaluationDAO;
+
     @Autowired
-	 EnseignantDAO ensDao;
+    EnseignantDAO ensDao;
     @Autowired
-	 ECDAO ecDao;
+    ECDAO ecDao;
     @Autowired
-	 UEDAO ueDao;
+    UEDAO ueDao;
     @Autowired
-	 PromotionDAO promDao;
+    PromotionDAO promDao;
     @Autowired
     PromotionService promService;
     @Autowired
     EtatEvaluationDAO etatDAO;
+ 
+     public Evaluation addEvaluation(Evaluation eva) {
+         return this.evaluationDAO.save(eva);}
+
 
     private Sort orderBy(String property){
         return Sort.by(Sort.Direction.DESC, property);
     }
      public List<Evaluation> getAllEvals()
      {
-         List<Evaluation> ev = this.evalDao.findAll(orderBy("debutReponse"));
+         List<Evaluation> ev = this.evaluationDAO.findAll(orderBy("debutReponse"));
          for (Evaluation evaluation:
               ev) {
              evaluation.setEtat(etatDAO.getOne(evaluation.getEtat()).getSignification());
@@ -65,7 +74,7 @@ public class EvaluationService {
              throw new NotFoundException("Aucune promotion actuelle de la formation que vous avez choisie");
          }
          try{
-             evaluation = evalDao.save(evaluation);
+             evaluation = evaluationDAO.save(evaluation);
          }catch (Exception ex){
              if(ex.getMessage().contains("EVE_EVE_UK")){
                  throw new BadRequestException("Cette evaluation existe deja");
@@ -74,5 +83,12 @@ public class EvaluationService {
          }
          return evaluation;
      }
-
+    //update Evaluation****
+    public boolean UpdateEvaluation(Evaluation eva) {
+        if (this.evaluationDAO.findById(eva.getIdEvaluation()).isPresent()) {
+            this.evaluationDAO.save(eva);
+            return true ;
+        }
+        return false;
+    }
 }
