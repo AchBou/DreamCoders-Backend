@@ -32,9 +32,12 @@ public class QuestionService {
         return this.questionDao.findById(id);
     }
 
-    public Question findQuestifExistinRub(Integer id) {
+    public boolean findQuestifExistinRub(Integer id) {
+        if(this.questionDao.FindQstInRub(id) == null){
+            return false;
+        }
+        return true;
 
-        return this.questionDao.FindQstInRub(id);
     }
     public boolean UpdateQuestion(Question qq) {
         if (this.questionDao.findById(qq.getIdQuestion()).isPresent()) {
@@ -55,11 +58,11 @@ public class QuestionService {
         }
         return true;
     }
-    public String FindQsthasqualif(Integer id){
+    public boolean FindQsthasqualif(Integer id){
         if(this.questionDao.FindQstHasQualif(id) == null){
-            return "no Exist in qualificatif";
+            return false;
         }
-        return "Exist in qualificatif";
+        return true;
     }
 
 

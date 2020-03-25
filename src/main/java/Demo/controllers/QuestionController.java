@@ -1,10 +1,16 @@
 package Demo.controllers;
+import Demo.model.Qualificatif;
 import Demo.model.Question;
 import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -17,29 +23,111 @@ public class QuestionController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Question>> getAllQuestions()
     {
-        return  new ResponseEntity<>(  QuestionService.getQuestions(), HttpStatus.OK);
+        try{
+            return  new ResponseEntity<>(  QuestionService.getQuestions(), HttpStatus.OK);}
+        catch(java.util.NoSuchElementException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Question>(),headers, HttpStatus.NOT_FOUND);
+        }
+        catch (NotFoundException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Question>(),headers, HttpStatus.NOT_FOUND);
+        }
+        catch (BadRequestException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Question>(),headers, HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new ArrayList<Question>(),headers, HttpStatus.BAD_REQUEST);
+        }
 
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Question> getQuestion(@PathVariable  Integer id) {
         try{
 
-            return  new ResponseEntity<>( QuestionService.findById(id).get(), HttpStatus.OK);}
-        	catch(java.util.NoSuchElementException e){
-            return  new ResponseEntity<>(new Question(), HttpStatus.NOT_FOUND);
+            return  new ResponseEntity<>(QuestionService.findById(id).get(), HttpStatus.OK);}
+        catch(java.util.NoSuchElementException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.NOT_FOUND);
         }
+        catch (NotFoundException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.NOT_FOUND);
+        }
+        catch (BadRequestException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.BAD_REQUEST);
+        }
+
     }
     @RequestMapping(value = "/qstinrub/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Question> getQuestionInRub(@PathVariable  Integer id)
+    public ResponseEntity<Boolean> getQuestionInRub(@PathVariable  Integer id)
     {
-        return  new ResponseEntity<>( QuestionService.findQuestifExistinRub(id), HttpStatus.OK);
-
+        try{
+            return  new ResponseEntity<>( QuestionService.findQuestifExistinRub(id), HttpStatus.OK);
+        }
+        catch(java.util.NoSuchElementException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
+        }
+        catch (NotFoundException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
+        catch (BadRequestException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Message d'erreur:", e.getMessage());
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
     }
 
    @RequestMapping(value = "/qstinqualif/{id}", method = RequestMethod.GET)
-   public ResponseEntity<String> getQuestionInq(@PathVariable  Integer id)
+   public ResponseEntity<Boolean> getQuestionInq(@PathVariable  Integer id)
    {
-       return  new ResponseEntity<>( QuestionService.FindQsthasqualif(id), HttpStatus.OK);
+       try{
+           return  new ResponseEntity<>( QuestionService.FindQsthasqualif(id), HttpStatus.OK);
+       }
+       catch(java.util.NoSuchElementException e){
+           HttpHeaders headers = new HttpHeaders();
+           headers.set("Message d'erreur:", e.getMessage());
+           return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
+       }
+       catch (NotFoundException e){
+           HttpHeaders headers = new HttpHeaders();
+           headers.set("Message d'erreur:", e.getMessage());
+           return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
+       }
+       catch (BadRequestException e){
+           HttpHeaders headers = new HttpHeaders();
+           headers.set("Message d'erreur:", e.getMessage());
+           return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+       }
+       catch (Exception e){
+           HttpHeaders headers = new HttpHeaders();
+           headers.set("Message d'erreur:", e.getMessage());
+           return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+       }
 
    }
 
@@ -51,14 +139,55 @@ public class QuestionController {
     }
     @PostMapping("/create")
     ResponseEntity<Question> CreateQuestion(@RequestBody Question newQuestion) {
+        try{
 
-        return  new ResponseEntity<Question>(QuestionService.Create(newQuestion), HttpStatus.OK);
-    }
+            return  new ResponseEntity<>(QuestionService.Create(newQuestion), HttpStatus.OK);}
+        catch(java.util.NoSuchElementException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.NOT_FOUND);
+        }
+        catch (NotFoundException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.NOT_FOUND);
+        }
+        catch (BadRequestException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(new Question(),headers, HttpStatus.BAD_REQUEST);
+        } }
 
 
     @PostMapping(value = "/update")
     public ResponseEntity<Boolean> updateQst(@RequestBody Question nvqst) {
-        return  new ResponseEntity<>( QuestionService.UpdateQuestion(nvqst), HttpStatus.OK);
+        try{
+            return  new ResponseEntity<>( QuestionService.UpdateQuestion(nvqst), HttpStatus.OK);}
+        catch(java.util.NoSuchElementException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
+        }
+        catch (NotFoundException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.NOT_FOUND);
+        }
+        catch (BadRequestException e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception e){
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false,headers, HttpStatus.BAD_REQUEST);
+        }
 
     }
 
@@ -66,7 +195,26 @@ public class QuestionController {
     @DeleteMapping (value = "/supprimer/{id}")
 
     public ResponseEntity<Boolean> supprimerQuestion(@PathVariable int id) {
-        return  new ResponseEntity<>( QuestionService.supprimer(id), HttpStatus.OK);
+        try {
+
+            return new ResponseEntity<>(QuestionService.supprimer(id), HttpStatus.OK);
+        } catch (java.util.NoSuchElementException e) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false, headers, HttpStatus.NOT_FOUND);
+        } catch (NotFoundException e) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false, headers, HttpStatus.NOT_FOUND);
+        } catch (BadRequestException e) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false, headers, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("message", e.getMessage());
+            return new ResponseEntity<>(false, headers, HttpStatus.BAD_REQUEST);
+        }
 
     }
     }
