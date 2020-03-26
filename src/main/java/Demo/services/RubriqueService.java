@@ -1,5 +1,6 @@
 package Demo.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Demo.model.Rubrique;
+
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 
 @Service
 public class RubriqueService {
@@ -24,10 +28,12 @@ public class RubriqueService {
     }
     public boolean UpdateRubrique(Rubrique Rub) {
             if (this.userDao.findById(Rub.getIdRubrique()).isPresent()) {
+
+                Rub.setOrdre(BigDecimal.valueOf(0));
                  this.userDao.save(Rub);
                 return true ;
             }
-            return false;
+        throw new NotFoundException("Cettre Rubrique n'éxist pas");
         }
 
     public Optional<Rubrique> FindRubrique(Integer id){
@@ -35,11 +41,13 @@ public class RubriqueService {
 
             return this.userDao.findById(id);
 
-    }
-        return Optional.empty();
+
+        }
+        throw new NotFoundException("Cettre Rubrique n'éxist pas");
+
     }
     public Rubrique CreateRubrique(Rubrique Rub) {
-
+        Rub.setOrdre(BigDecimal.valueOf(0));
            return this.userDao.save(Rub);
     }
     public boolean Delete(Integer id) {
@@ -47,13 +55,18 @@ public class RubriqueService {
             this.userDao.deleteById(id);
             return true ;
         }
-        return false;
+        throw new NotFoundException("Cette Rubrique n'éxist pas");
+
+
     }
     public boolean TestRubLink(Integer id){
         if(this.userDao.TestRub(id).equals(0)){
             return false;
+
         }
-        return true;
+        throw new BadRequestException("Cette Rubrique est déja utilisée");
+
+
     }
 
 

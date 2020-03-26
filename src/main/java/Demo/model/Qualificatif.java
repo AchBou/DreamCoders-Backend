@@ -1,5 +1,7 @@
 package Demo.model;
 
+import net.bytebuddy.implementation.bind.annotation.Super;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -25,6 +27,8 @@ public class Qualificatif implements Serializable {
 
 	public Qualificatif() {
 	}
+
+
 	public Qualificatif(String mina, String maxa) {
 		super();
 		//this.idQualificatif=idQualificatif;
