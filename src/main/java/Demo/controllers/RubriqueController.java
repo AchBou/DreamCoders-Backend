@@ -23,7 +23,9 @@ public class RubriqueController {
     RubriqueService RubService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
+
     public ResponseEntity<List<Rubrique>> getAllRubriques() {
+
         return  new ResponseEntity<>(  RubService.getAllRubriques(), HttpStatus.OK);
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -3,7 +3,6 @@ package Demo.services;
 import Demo.DAO.QualificatifDAO;
 import Demo.model.Qualificatif;
 import org.springframework.stereotype.Service;
-import Exception.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,19 +22,19 @@ public class QualificatifService {
         return this.qualificatifDAO.findAll();
     }
 
-    public  Optional<Qualificatif> getbyid(Integer id) throws SprintException {
+    public  Optional<Qualificatif> getbyid(Integer id) {
         return this.qualificatifDAO.findById(id);
     }
-    public Qualificatif Create(Qualificatif Qual) throws SprintException
+    public Qualificatif Create(Qualificatif Qual)
     {
         return this.qualificatifDAO.save(Qual);
     }
 
-    public String FindQualifinQsts(Integer id){
+    public boolean FindQualifinQsts(Integer id){
         if(this.qualificatifDAO.FindquaInQsts(id) == null){
-            return "no Exist in question";
+            return false;
         }
-        return "Exist in question";
+        return true;
     }
 
 

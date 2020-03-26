@@ -1,5 +1,6 @@
 package Demo.model;
 
+import Demo.model.views.VEtatEvaluation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,8 +21,8 @@ public class Evaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator1")
-	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "EVE_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator15")
+	@SequenceGenerator(name="SequenceIdGenerator15", sequenceName = "EVE_SEQ",allocationSize=1)
 	@Column(name="ID_EVALUATION")
 	private long idEvaluation;
 
@@ -32,8 +33,9 @@ public class Evaluation implements Serializable {
 	@Column(name="DESIGNATION")
 	private String designation;
 
-	@Column(name="ETAT")
-	private String etat;
+	@ManyToOne
+	@JoinColumn(name="ETAT")
+	private VEtatEvaluation etat;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FIN_REPONSE")
@@ -126,11 +128,11 @@ public class Evaluation implements Serializable {
 		this.designation = designation;
 	}
 
-	public String getEtat() {
+	public VEtatEvaluation getEtat() {
 		return this.etat;
 	}
 
-	public void setEtat(String etat) {
+	public void setEtat(VEtatEvaluation etat) {
 		this.etat = etat;
 	}
 
@@ -226,7 +228,11 @@ public class Evaluation implements Serializable {
 	public List<RubriqueEvaluation> getRubriqueEvaluations() {
 		return rubriqueEvaluations;
 	}
+
 	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
 		this.rubriqueEvaluations = rubriqueEvaluations;
+	}
+	public void setRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
+		this.rubriqueEvaluations.add(rubriqueEvaluation);
 	}
 }
