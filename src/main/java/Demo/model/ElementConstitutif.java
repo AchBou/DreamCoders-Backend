@@ -1,6 +1,7 @@
 package Demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="ELEMENT_CONSTITUTIF")
 @NamedQuery(name="ElementConstitutif.findAll", query="SELECT e FROM ElementConstitutif e")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ElementConstitutif implements Serializable {
 	private static final long serialVersionUID = 1L;
 

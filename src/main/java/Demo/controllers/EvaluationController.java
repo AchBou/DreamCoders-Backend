@@ -6,17 +6,21 @@ import java.util.List;
 //import javax.ws.rs.core.MediaType;
 
 import Demo.model.RubriqueEvaluation;
+import Demo.modelPerso.EvaluationPers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;
+
+import javax.ws.rs.core.Response;
 
 
 @RestController
@@ -34,12 +38,18 @@ public class EvaluationController {
         return evaService.getAllEvals();
     }
 
-    /* @RequestMapping(value = "/adduser", method = RequestMethod.POST,
+    @RequestMapping(value = "/add", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody()
-    public EvaluationService addNewUser(@RequestBody Evaluation eva) {
-        return this.evaService.addUser(eva);
-    } */
+    public Response addNewEval(@RequestBody EvaluationPers eva) {
+        try{
+            return Response.ok(this.evaService.addEvaluation(eva)).build();
+        }
+        catch(Exception ex){
+            return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
+        }
+    }
+
     //change etat d'evaluation
     @PostMapping(value = "/update")
     public Boolean publierEvaluation(@RequestBody Evaluation eva) {

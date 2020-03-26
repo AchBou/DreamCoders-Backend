@@ -198,6 +198,7 @@ public class Evaluation implements Serializable {
 
 	public void setElementConstitutif(ElementConstitutif elementConstitutiff) {
 		this.elementConstitutif = elementConstitutiff;
+		this.setCode_ec(elementConstitutiff.getId().getCodeEc());
 	}
 
 	public Enseignant getEnseignant() {
@@ -215,6 +216,7 @@ public class Evaluation implements Serializable {
 	public void setPromotion(Promotion promotionn) {
 		this.promotion = promotionn;
 		this.setAnne_Universitaire(promotionn.getId().getAnneeUniversitaire());
+		this.setCode_formation(promotionn.getId().getCodeFormation());
 	}
 
 	public UniteEnseignement getUniteEnseignement() {
@@ -223,6 +225,7 @@ public class Evaluation implements Serializable {
 
 	public void setUniteEnseignement(UniteEnseignement uniteEnseignementt) {
 		this.uniteEnseignement = uniteEnseignementt;
+		setCode_eu(uniteEnseignementt.getId().getCodeUe());
 	}
 
 	public List<RubriqueEvaluation> getRubriqueEvaluations() {

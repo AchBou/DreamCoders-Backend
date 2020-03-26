@@ -1,10 +1,13 @@
 package Demo.model.views;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "V_ETAT_EVALUATION", schema = "ADMIN")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class VEtatEvaluation {
     private String code;
     private String abreviation;

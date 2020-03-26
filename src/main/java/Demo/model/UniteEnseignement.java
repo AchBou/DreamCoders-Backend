@@ -3,6 +3,7 @@ package Demo.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name="UNITE_ENSEIGNEMENT")
 @NamedQuery(name="UniteEnseignement.findAll", query="SELECT u FROM UniteEnseignement u")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UniteEnseignement implements Serializable {
 	private static final long serialVersionUID = 1L;
 

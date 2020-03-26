@@ -34,10 +34,6 @@ public class EvaluationService {
     PromotionService promService;
     @Autowired
     EtatEvaluationDAO etatDAO;
- 
-     public Evaluation addEvaluation(Evaluation eva) {
-         return this.evaluationDAO.save(eva);}
-
 
     private Sort orderBy(String property){
         return Sort.by(Sort.Direction.DESC, property);
@@ -48,7 +44,7 @@ public class EvaluationService {
          return ev;
      }
  
-     public Evaluation addUser(EvaluationPers eva) {
+     public Evaluation addEvaluation(EvaluationPers eva) {
          //System.out.println(eva.toString());
          Enseignant en = ensDao.getOne(1); //Phillipe Saliou
          Evaluation evaluation = new Evaluation();
@@ -59,9 +55,10 @@ public class EvaluationService {
          evaluation.setNoEvaluation(eva.getNo_evaluantion());
          evaluation.setPeriode(eva.getPeriode());
          evaluation.setEtat(etatDAO.getOne(eva.getEtat()));
-         evaluation.setCode_formation(eva.getCode_formation());
-         evaluation.setCode_eu(eva.getCode_ue());
-         evaluation.setCode_ec(eva.getCode_ec());
+         evaluation.setUniteEnseignement(ueDao.getOne(new UniteEnseignementPK(eva.getCode_formation(), eva.getCode_ue())));
+         if(eva.getCode_ec()!=null && !eva.getCode_ec().isEmpty()){
+             evaluation.setElementConstitutif(ecDao.getOne(new ElementConstitutifPK(eva.getCode_formation(), eva.getCode_ue(), eva.getCode_ec())));
+         }
          Promotion p = this.promService.getCurrentPromo(eva.getCode_formation());
          if(p!=null){
              evaluation.setPromotion(p);
@@ -71,9 +68,10 @@ public class EvaluationService {
          }
          try{
              evaluation = evaluationDAO.save(evaluation);
+             evaluation = evaluationDAO.getOne(evaluation.getIdEvaluation());
          }catch (Exception ex){
              if(ex.getMessage().contains("EVE_EVE_UK")){
-                 throw new BadRequestException("Cette evaluation existe deja");
+                 throw new BadRequestException("Cette évaluation existe déjà");
              }
              throw ex;
          }

@@ -57,11 +57,9 @@ public class RubriqueEvalController {
 
 
     }
-    @DeleteMapping (value = "/supprimer/{idEvaluation}/{idRubrique}")
+    @DeleteMapping (value = "/supprimer/{idRubriqueEvaluation}")
 
-    public void supprimerRubriqueEval(@PathVariable long idEvaluation, @PathVariable long idRubrique) {
-        Integer idrub = (int) (long) idRubrique;
-
-        rubriqueEvalService.deleteRubrique(idEvaluation,idrub);
+    public boolean supprimerRubriqueEval(@PathVariable long idRubriqueEvaluation) {
+        return rubriqueEvalService.deleteRubrique(idRubriqueEvaluation);
     }
 }
