@@ -51,7 +51,7 @@ public class QualificatifController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Qualificatif> getQuestion(@PathVariable  Integer id) {
+    public ResponseEntity<Qualificatif> getQualif(@PathVariable  Integer id) {
         try{
 
             return  new ResponseEntity<>(QualificatiSer.getbyid(id).get(), HttpStatus.OK);}
