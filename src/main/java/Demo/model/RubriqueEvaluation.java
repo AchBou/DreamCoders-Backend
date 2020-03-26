@@ -1,6 +1,8 @@
 package Demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -19,22 +21,26 @@ public class RubriqueEvaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator1")
+	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "REV_SEQ",allocationSize=1)
 	@Column(name="ID_RUBRIQUE_EVALUATION")
 	private long idRubriqueEvaluation;
 
 	private String designation;
 
+	@Nullable
 	private BigDecimal ordre;
 
 	//uni-directional many-to-one association to Evaluation
 	@ManyToOne
-	@JoinColumn(name="ID_EVALUATION", insertable=false, updatable=false)
+	@JoinColumn(name="ID_EVALUATION")
+	@JsonIgnore
 	private Evaluation evaluation;
 
 	//uni-directional many-to-one association to Rubrique
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE", insertable=false, updatable=false)
+	@JoinColumn(name="ID_RUBRIQUE")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Rubrique rubrique;
 
 	@OneToMany(mappedBy = "rubriqueEvaluation")
@@ -42,6 +48,10 @@ public class RubriqueEvaluation implements Serializable {
 	private List<QuestionEvaluation> questionEvaluations;
 
 	public RubriqueEvaluation() {
+	}
+	public RubriqueEvaluation(Evaluation evaluation, Rubrique rubrique) {
+		this.evaluation = evaluation;
+		this.rubrique = rubrique;
 	}
 
 	public long getIdRubriqueEvaluation() {
@@ -72,8 +82,8 @@ public class RubriqueEvaluation implements Serializable {
 		return this.evaluation;
 	}
 
-	public void setEvaluation(Evaluation evaluationn) {
-		this.evaluation = evaluationn;
+	public void setEvaluation(Evaluation evaluation) {
+		this.evaluation = evaluation;
 	}
 
 	public Rubrique getRubrique() {
@@ -89,5 +99,12 @@ public class RubriqueEvaluation implements Serializable {
 	}
 	public void setQuestionEvaluations(List<QuestionEvaluation> questionEvaluations) {
 		this.questionEvaluations = questionEvaluations;
+	}
+
+	public RubriqueEvaluation(String designation, BigDecimal ordre, Evaluation evaluation, Rubrique rubrique) {
+		this.designation = designation;
+		this.ordre = ordre;
+		this.evaluation = evaluation;
+		this.rubrique = rubrique;
 	}
 }

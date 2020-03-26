@@ -91,4 +91,11 @@ public class EvaluationService {
         }
         return false;
     }
+
+    public boolean publierEvaluation(Evaluation eva) {
+         Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
+        evaluation.setEtat("DIS");
+        evaluationDAO.save(evaluation);
+        return false;
+    }
 }

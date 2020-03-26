@@ -20,8 +20,8 @@ public class Evaluation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator1")
-	@SequenceGenerator(name="SequenceIdGenerator1", sequenceName = "EVE_SEQ",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SequenceIdGenerator15")
+	@SequenceGenerator(name="SequenceIdGenerator15", sequenceName = "EVE_SEQ",allocationSize=1)
 	@Column(name="ID_EVALUATION")
 	private long idEvaluation;
 
@@ -95,11 +95,13 @@ public class Evaluation implements Serializable {
     private UniteEnseignement uniteEnseignement;
 
 	@OneToMany(mappedBy = "evaluation")
-	@JsonIgnoreProperties(value = "evaluation")
 	private List<RubriqueEvaluation> rubriqueEvaluations;
+
 
 	public Evaluation() {
 	}
+
+
 
 	public long getIdEvaluation() {
 		return this.idEvaluation;
@@ -225,7 +227,11 @@ public class Evaluation implements Serializable {
 	public List<RubriqueEvaluation> getRubriqueEvaluations() {
 		return rubriqueEvaluations;
 	}
+
 	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
 		this.rubriqueEvaluations = rubriqueEvaluations;
+	}
+	public void setRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
+		this.rubriqueEvaluations.add(rubriqueEvaluation);
 	}
 }

@@ -5,6 +5,8 @@ import Demo.model.RubriqueEvaluation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,16 +17,15 @@ public class RubriqueEvalService {
 
     //lister les rubriques d'une evaluation****
     public List<RubriqueEvaluation> findRubriqueByEval(long idEvaluation){
-      return rubriqueEvalDAO.findRubriqueByEval(idEvaluation);
+
+        return rubriqueEvalDAO.findRubriqueByEval(idEvaluation);
     }
 
     //Supprimer une rubrique*****
-    public boolean deleteRubrique(long idRubrique) {
-        if (this.rubriqueEvalDAO.findById(idRubrique).isPresent()) {
-            this.rubriqueEvalDAO.deleteById(idRubrique);
-            return true ;
-        }
-        return false;
+    public boolean deleteRubrique(long idEvaluation, Integer idRubrique) {
+       rubriqueEvalDAO.deleterubriqueeval(idEvaluation,idRubrique);
+
+        return true;
     }
     //affecter rubrique evaluation***
 
