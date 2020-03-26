@@ -62,11 +62,8 @@ public class RubriqueService {
     public boolean TestRubLink(Integer id){
         if(this.userDao.TestRub(id).equals(0)){
             return false;
-
         }
-        throw new BadRequestException("Cette Rubrique est déja utilisée");
-
-
+        return true;
     }
 
 

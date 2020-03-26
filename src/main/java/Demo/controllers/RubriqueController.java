@@ -89,7 +89,6 @@ public class RubriqueController {
     @RequestMapping(value = "/linked/{id}", method = RequestMethod.GET)
     public ResponseEntity<Boolean> TestRubrique(@PathVariable Integer id) {
         try{
-
             return  new ResponseEntity<>( RubService.TestRubLink(id), HttpStatus.OK);}
         catch(java.util.NoSuchElementException e){
             HttpHeaders headers = new HttpHeaders();
