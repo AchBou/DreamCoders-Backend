@@ -42,8 +42,8 @@ public class EvaluationController {
     } */
     //change etat d'evaluation
     @PostMapping(value = "/update")
-    public ResponseEntity<Boolean> UpdateEval(@RequestBody Evaluation eva) {
-        return  new ResponseEntity<>(evaService.UpdateEvaluation(eva), HttpStatus.OK);
+    public Boolean publierEvaluation(@RequestBody Evaluation eva) {
+        return  evaService.publierEvaluation(eva);
 
 
     }

@@ -19,12 +19,9 @@ public class RubriqueEvalService {
     }
 
     //Supprimer une rubrique*****
-    public boolean deleteRubrique(long idRubrique) {
-        if (this.rubriqueEvalDAO.findById(idRubrique).isPresent()) {
-            this.rubriqueEvalDAO.deleteById(idRubrique);
-            return true ;
-        }
-        return false;
+    public boolean deleteRubrique(long idEvaluation, Integer idRubrique) {
+       rubriqueEvalDAO.deleterubriqueeval(idEvaluation,idRubrique);
+        return true;
     }
     //affecter rubrique evaluation***
 
