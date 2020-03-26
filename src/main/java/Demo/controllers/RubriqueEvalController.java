@@ -8,6 +8,8 @@ import Demo.model.RubriqueEvaluation;
 import Demo.services.EvaluationService;
 import Demo.services.RubriqueEvalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -32,20 +34,19 @@ public class RubriqueEvalController {
     RubriqueDAO rubriqueDAO;
 
 
-
-
     //listee ***********
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public List<Rubrique> getRubriqueByEval(@PathVariable long id) {
+    public ResponseEntity<List<Rubrique>> getRubriqueByEval(@PathVariable long id) {
         List<Rubrique> rubriques = new ArrayList<>();
-         rubriqueEvalService.findRubriqueByEval(id).forEach(rubriqueEvaluation -> {
+        rubriqueEvalService.findRubriqueByEval(id).forEach(rubriqueEvaluation -> {
             rubriques.add(rubriqueEvaluation.getRubrique());
         });
-        return rubriques;
-
+        return new ResponseEntity<>(rubriques, HttpStatus.OK);
     }
+
+
     @GetMapping(value = "/create/{idEvaluation}/{idRubrique}")
-    public RubriqueEvaluation createRubriqueEval(@PathVariable long idEvaluation,@PathVariable int idRubrique) {
+    public ResponseEntity<RubriqueEvaluation> createRubriqueEval(@PathVariable long idEvaluation, @PathVariable int idRubrique) {
         Integer iInteger = new Integer(idRubrique);
 
         RubriqueEvaluation rubriqueEvaluation = new RubriqueEvaluation();
@@ -53,15 +54,18 @@ public class RubriqueEvalController {
         rubriqueEvaluation.setRubrique(rubriqueDAO.getOne(iInteger));
         rubriqueEvaluation.setOrdre(BigDecimal.valueOf(0));
 
-        return rubriqueEvalService.createRubEval(rubriqueEvaluation);
 
-
+        return new ResponseEntity<>(rubriqueEvalService.createRubEval(rubriqueEvaluation), HttpStatus.OK);
     }
-    @DeleteMapping (value = "/supprimer/{idEvaluation}/{idRubrique}")
 
-    public void supprimerRubriqueEval(@PathVariable long idEvaluation, @PathVariable long idRubrique) {
+
+    @DeleteMapping(value = "/supprimer/{idEvaluation}/{idRubrique}")
+
+    public ResponseEntity supprimerRubriqueEval(@PathVariable long idEvaluation, @PathVariable long idRubrique) {
         Integer idrub = (int) (long) idRubrique;
+        rubriqueEvalService.deleteRubrique(idEvaluation, idrub);
 
-        rubriqueEvalService.deleteRubrique(idEvaluation,idrub);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
