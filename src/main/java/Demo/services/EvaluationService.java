@@ -88,7 +88,13 @@ public class EvaluationService {
 
     public boolean publierEvaluation(Evaluation eva) {
         Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
-        for (RubriqueEvaluation re :
+        if(evaluation.getRubriqueEvaluations().size() < 4){
+            throw new RuntimeException("Vous devez avoir au minimum 4 rubriques dans cette évaluation pour pouvoir la publier");
+        }
+        if(evaluation.getRubriqueEvaluations().size() > 8){
+                throw new RuntimeException("Vous devez avoir au maximum 8 rubriques dans cette évaluation pour pouvoir la publier");
+            }
+            for (RubriqueEvaluation re :
                 evaluation.getRubriqueEvaluations()) {
             if (re.getQuestionEvaluations().isEmpty()) {
                 return false;
