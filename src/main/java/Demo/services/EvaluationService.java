@@ -45,10 +45,6 @@ public class EvaluationService {
      public List<Evaluation> getAllEvals()
      {
          List<Evaluation> ev = this.evaluationDAO.findAll(orderBy("debutReponse"));
-         for (Evaluation evaluation:
-              ev) {
-             evaluation.setEtat(etatDAO.getOne(evaluation.getEtat()).getSignification());
-         }
          return ev;
      }
  
@@ -62,7 +58,7 @@ public class EvaluationService {
          evaluation.setDesignation(eva.getDesignation());
          evaluation.setNoEvaluation(eva.getNo_evaluantion());
          evaluation.setPeriode(eva.getPeriode());
-         evaluation.setEtat(eva.getEtat());
+         evaluation.setEtat(etatDAO.getOne(eva.getEtat()));
          evaluation.setCode_formation(eva.getCode_formation());
          evaluation.setCode_eu(eva.getCode_ue());
          evaluation.setCode_ec(eva.getCode_ec());
@@ -94,7 +90,7 @@ public class EvaluationService {
 
     public boolean publierEvaluation(Evaluation eva) {
          Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
-        evaluation.setEtat("DIS");
+        evaluation.setEtat(etatDAO.getOne("DIS"));
         evaluationDAO.save(evaluation);
         return false;
     }
