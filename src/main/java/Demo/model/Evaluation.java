@@ -198,7 +198,9 @@ public class Evaluation implements Serializable {
 
 	public void setElementConstitutif(ElementConstitutif elementConstitutiff) {
 		this.elementConstitutif = elementConstitutiff;
-		this.setCode_ec(elementConstitutiff.getId().getCodeEc());
+		if(elementConstitutiff!=null){
+			this.setCode_ec(elementConstitutiff.getId().getCodeEc());
+		}
 	}
 
 	public Enseignant getEnseignant() {

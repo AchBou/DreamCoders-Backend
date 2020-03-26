@@ -14,6 +14,6 @@ public interface UEDAO extends JpaRepository<UniteEnseignement, UniteEnseignemen
     @Query("select UE from UniteEnseignement UE where UE.id.codeFormation = ?1")
     List<UniteEnseignement> findByCodeFormation(String codeFormation);
     
-    @Query("Select EC from ElementConstitutif EC where EC.id.codeUe = ?1")
-    List<ElementConstitutif> findECByCodeUE(String codeUE);
+    @Query("Select EC from ElementConstitutif EC where EC.uniteEnseignementt = ?1")
+    List<ElementConstitutif> findECByCodeUE(UniteEnseignement UE);
 }

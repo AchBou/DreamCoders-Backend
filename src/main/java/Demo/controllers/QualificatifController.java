@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/qualicatif")
+@RequestMapping("/qualificatif")
 public class QualificatifController {
     private static final Logger logger = LoggerFactory.getLogger(QualificatifController.class);
     @Autowired

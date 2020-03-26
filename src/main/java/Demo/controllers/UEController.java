@@ -27,10 +27,10 @@ public class UEController {
     } */
     
     
-    @RequestMapping(value = "{code_ue}/ec", method = RequestMethod.GET)
-    public Response getECByCodeUE(@PathVariable("code_ue") String codeUE) {
+    @RequestMapping(value = "{code_ue}/{code_formation}/ec", method = RequestMethod.GET)
+    public Response getECByCodeUE(@PathVariable("code_ue") String codeUE, @PathVariable("code_formation") String codeForm) {
         Response.Status s = Response.Status.OK;
-        List<ElementConstitutif> listeUnitesEnseignement = ueService.findECByUE(codeUE);
+        List<ElementConstitutif> listeUnitesEnseignement = ueService.findECByUE(codeUE, codeForm);
         if(listeUnitesEnseignement.isEmpty()) s = Response.Status.NOT_FOUND;
         return Response
                 .status(s)

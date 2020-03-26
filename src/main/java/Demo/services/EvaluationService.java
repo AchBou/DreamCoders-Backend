@@ -87,9 +87,15 @@ public class EvaluationService {
     }
 
     public boolean publierEvaluation(Evaluation eva) {
-         Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
+        Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
+        for (RubriqueEvaluation re :
+                evaluation.getRubriqueEvaluations()) {
+            if (re.getQuestionEvaluations().isEmpty()) {
+                return false;
+            }
+        }
         evaluation.setEtat(etatDAO.getOne("DIS"));
         evaluationDAO.save(evaluation);
-        return false;
+        return true;
     }
 }

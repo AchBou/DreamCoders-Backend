@@ -23,8 +23,9 @@ public class UEService {
        return listUnitesEnseignementByForm;
     }
     
-    public List<ElementConstitutif> findECByUE(String codeUE){
-        List<ElementConstitutif> listElementsConstitutifsByUE = ueDAO.findECByCodeUE(codeUE);
+    public List<ElementConstitutif> findECByUE(String codeUE, String codeFormation){
+        UniteEnseignement ue = ueDAO.getOne(new UniteEnseignementPK(codeFormation,codeUE));
+        List<ElementConstitutif> listElementsConstitutifsByUE = ueDAO.findECByCodeUE(ue);
 
        return listElementsConstitutifsByUE;
     }
