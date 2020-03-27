@@ -3,19 +3,13 @@ package Demo.controllers;
 import java.util.List;
 
 
-//import javax.ws.rs.core.MediaType;
 
-import Demo.model.RubriqueEvaluation;
 import Demo.modelPerso.EvaluationPers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import Demo.model.Evaluation;
 import Demo.services.EvaluationService;

@@ -1,5 +1,4 @@
 package Demo.controllers;
-import Demo.model.Qualificatif;
 import Demo.model.Question;
 import Demo.services.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;

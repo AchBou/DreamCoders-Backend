@@ -2,7 +2,6 @@ package Demo.services;
 
 import Demo.DAO.UEDAO;
 import Demo.model.ElementConstitutif;
-import Demo.model.ElementConstitutifPK;
 import Demo.model.UniteEnseignement;
 import Demo.model.UniteEnseignementPK;
 import org.springframework.beans.factory.annotation.Autowired;

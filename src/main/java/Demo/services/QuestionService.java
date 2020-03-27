@@ -16,7 +16,7 @@ public class QuestionService {
     }
     public List<Question> getQuestions() {
 
-        return this.questionDao.findAll();
+        return this.questionDao.findAllByOrderByIntituleAsc();
     }
 
     public List<Question> getQuestionordre() {

@@ -1,7 +1,6 @@
 package Demo.services;
 
 import Demo.DAO.QualificatifDAO;
-import Demo.DAO.QuestionDAO;
 import Demo.model.Qualificatif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +11,15 @@ import java.util.Optional;
 @Service
 public class QualificatifService {
 
-
-
-     private  final  QualificatifDAO qualificatifDAO;
+	@Autowired
+    QualificatifDAO qualificatifDAO;
 
     public QualificatifService(QualificatifDAO qualificatifDao) {
         this.qualificatifDAO = qualificatifDao;
     }
     public List<Qualificatif> findallqua() {
 
-        return this.qualificatifDAO.findAll();
+        return this.qualificatifDAO.findAllByOrderByMinimalAsc();
     }
 
     public  Optional<Qualificatif> getbyid(Integer id) {

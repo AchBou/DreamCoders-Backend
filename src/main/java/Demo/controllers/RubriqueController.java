@@ -4,23 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.HttpEntity;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.bind.annotation.ResponseBody;
 
 import Demo.model.Rubrique;
 import Demo.services.RubriqueService;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.Response;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

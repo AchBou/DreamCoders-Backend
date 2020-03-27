@@ -2,7 +2,6 @@ package Demo.controllers;
 
 import Demo.DAO.EvaluationDAO;
 import Demo.DAO.RubriqueDAO;
-import Demo.model.Evaluation;
 import Demo.model.Rubrique;
 import Demo.model.RubriqueEvaluation;
 import Demo.services.EvaluationService;

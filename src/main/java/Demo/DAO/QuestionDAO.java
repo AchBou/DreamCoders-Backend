@@ -44,4 +44,7 @@ public interface QuestionDAO  extends JpaRepository<Question , Integer> {
                     "d.idQuestion =r.questionn.idQuestion")
     Integer Existorno(Integer idQuestion);
 
+
+	public List<Question> findAllByOrderByIntituleAsc();
+
 }

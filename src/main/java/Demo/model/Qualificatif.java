@@ -1,6 +1,5 @@
 package Demo.model;
 
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 import java.io.Serializable;
 import javax.persistence.*;

@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface RubriqueDAO extends JpaRepository<Rubrique, Integer>{
-    @Query("SELECT d "
+   /* @Query("SELECT d "
             + "FROM Rubrique d ORDER BY d.designation ASC ")
-    public List<Rubrique> Order();
+    public List<Rubrique> Order();*/
 
     @Query(
             value = "SELECT COUNT(*) FROM (SELECT RUBRIQUE.ID_RUBRIQUE FROM RUBRIQUE ,RUBRIQUE_QUESTION" +
@@ -20,4 +20,6 @@ public interface RubriqueDAO extends JpaRepository<Rubrique, Integer>{
             nativeQuery = true)
 
     Integer TestRub(Integer idQuestion);
+
+	public List<Rubrique> findAllByOrderByDesignationAsc();
 }

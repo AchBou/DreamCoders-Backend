@@ -1,9 +1,7 @@
 package Demo.services;
 
 import Demo.DAO.EnseignantDAO;
-import Demo.DAO.QuestionDAO;
 import Demo.model.Enseignant;
-import Demo.model.Qualificatif;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
