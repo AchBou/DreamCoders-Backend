@@ -41,14 +41,10 @@ public class RubriqueEvalController {
 
     //listee ***********
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Rubrique>> getRubriqueByEval(@PathVariable long id) {
+    public ResponseEntity getRubriqueByEval(@PathVariable long id) {
         try {
-            List<Rubrique> rubriques = new ArrayList<>();
-
-            rubriqueEvalService.findRubriqueByEval(id).forEach(rubriqueEvaluation -> {
-                rubriques.add(rubriqueEvaluation.getRubrique());
-            });
-            return new ResponseEntity<>(rubriques, HttpStatus.OK);
+            List<RubriqueEvaluation> rubEvals = rubriqueEvalService.findRubriqueByEval(id);
+            return new ResponseEntity<List<RubriqueEvaluation>>(rubEvals, HttpStatus.OK);
         } catch (java.util.NoSuchElementException e) {
             HttpHeaders headers = new HttpHeaders();
             headers.set("message", e.getMessage());

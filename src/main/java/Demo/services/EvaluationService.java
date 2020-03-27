@@ -86,7 +86,7 @@ public class EvaluationService {
         return false;
     }
 
-    public boolean publierEvaluation(Evaluation eva) {
+    public Evaluation publierEvaluation(Evaluation eva) {
         Evaluation evaluation = evaluationDAO.getOne(eva.getIdEvaluation());
         if(evaluation.getRubriqueEvaluations().size() < 4){
             throw new RuntimeException("Vous devez avoir au minimum 4 rubriques dans cette évaluation pour pouvoir la publier");
@@ -97,11 +97,11 @@ public class EvaluationService {
             for (RubriqueEvaluation re :
                 evaluation.getRubriqueEvaluations()) {
             if (re.getQuestionEvaluations().isEmpty()) {
-                return false;
+                throw new RuntimeException("Aucune rubrique ne doit être vide");
             }
         }
         evaluation.setEtat(etatDAO.getOne("DIS"));
-        evaluationDAO.save(evaluation);
-        return true;
+        evaluation = evaluationDAO.save(evaluation);
+        return evaluation;
     }
 }

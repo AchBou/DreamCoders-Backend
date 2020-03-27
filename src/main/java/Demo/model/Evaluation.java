@@ -99,6 +99,7 @@ public class Evaluation implements Serializable {
 	@OneToMany(mappedBy = "evaluation")
 	@JsonIgnoreProperties(value = "evaluation")
 	@OrderBy(value = "idRubriqueEvaluation")
+	@JsonIgnore
 	private List<RubriqueEvaluation> rubriqueEvaluations;
 
 	public Evaluation() {

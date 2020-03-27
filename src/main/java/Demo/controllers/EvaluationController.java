@@ -52,7 +52,7 @@ public class EvaluationController {
 
     //change etat d'evaluation
     @PostMapping(value = "/publier")
-    public Boolean publierEvaluation(@RequestBody Evaluation eva) {
+    public Evaluation publierEvaluation(@RequestBody Evaluation eva) {
         return  evaService.publierEvaluation(eva);
 
 
